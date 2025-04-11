@@ -4,6 +4,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import Contact from "@/components/Contact"
+import Education from "@/components/Education"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -47,11 +48,14 @@ export default function Home() {
             variants={fadeInUp}
             className="text-xl md:text-2xl text-foreground/80 mb-8"
           >
-            Full Stack Developer & Creative Problem Solver
+            Computer Engineering Student & Quantum Computing Enthusiast
           </motion.p>
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background" />
       </section>
+
+      {/* Education Section */}
+      <Education />
 
       {/* Projects Section */}
       <section
@@ -102,8 +106,9 @@ export default function Home() {
               variants={fadeInUp}
               className="text-lg text-foreground/80 max-w-3xl mx-auto"
             >
-              I'm a passionate developer with expertise in building modern web applications.
-              I love creating beautiful, functional, and user-friendly experiences.
+              I'm a junior at NYU studying Computer Engineering with a minor in Quantum Computing. 
+              I'm passionate about exploring the intersection of classical and quantum computing, 
+              and I love building innovative solutions to complex problems.
             </motion.p>
           </motion.div>
         </div>
