@@ -1,4 +1,16 @@
-.education-section {
+import "./Education.css";
+
+import Education from "./components/Education";
+
+<section id="education" class="education-section animate__animated animate__fadeIn">
+  <h2>Education</h2>
+  <div class="education-item">
+    <h3>New York University (NYU)</h3>
+    <p>Bachelor of Science in Computer Engineering</p>
+    <p>Specialization: Quantum Computing</p>
+    <p>Graduation Year: 2025</p>
+  </div>
+</section>.education-section {
   padding: 2rem;
   background-color: #f9f9f9;
   border-top: 1px solid #ddd;

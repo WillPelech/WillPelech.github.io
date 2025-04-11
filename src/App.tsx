@@ -14,7 +14,7 @@ const App: React.FC = () => {
 export default App;
 
 {
-  "name": "your-project-name",
+  "name": "willpelech-portfolio",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://WillPelech.github.io",

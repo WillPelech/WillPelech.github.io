@@ -1,0 +1,49 @@
+.education-section {
+  padding: 3rem 1rem;
+  background-color: #f4f4f9; /* Softer background color */
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.education-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #2c3e50; /* Darker color for better contrast */
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.education-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #ffffff; /* White card background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Card shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.education-item:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.education-item h3 {
+  font-size: 1.8rem;
+  color: #34495e; /* Slightly darker color */
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.education-item p {
+  font-size: 1.2rem;
+  color: #7f8c8d; /* Softer text color */
+  margin: 0.3rem 0;
+  line-height: 1.6;
+}
+
+.education-item p:last-child {
+  font-style: italic; /* Graduation year in italic */
+  color: #95a5a6; /* Lighter color for less emphasis */
+}
