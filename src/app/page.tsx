@@ -1,8 +1,9 @@
 "use client"
 
+import React from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi"
+import Contact from "@/components/Contact"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -22,7 +23,6 @@ export default function Home() {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [projectsRef, projectsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [aboutRef, aboutInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-  const [contactRef, contactInView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
     <div className="min-h-screen">
@@ -49,39 +49,6 @@ export default function Home() {
           >
             Full Stack Developer & Creative Problem Solver
           </motion.p>
-          <motion.div
-            variants={fadeInUp}
-            className="flex justify-center gap-4"
-          >
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-background border border-border"
-            >
-              <FiGithub className="h-6 w-6" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-background border border-border"
-            >
-              <FiLinkedin className="h-6 w-6" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              href="mailto:your.email@example.com"
-              className="p-3 rounded-full bg-background border border-border"
-            >
-              <FiMail className="h-6 w-6" />
-            </motion.a>
-          </motion.div>
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background" />
       </section>
@@ -143,42 +110,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section
-        id="contact"
-        ref={contactRef}
-        className="py-20 bg-secondary/10"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="initial"
-            animate={contactInView ? "animate" : "initial"}
-            variants={staggerContainer}
-            className="text-center"
-          >
-            <motion.h2
-              variants={fadeInUp}
-              className="text-4xl font-bold mb-8"
-            >
-              Get In Touch
-            </motion.h2>
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg text-foreground/80 mb-8"
-            >
-              I'm always open to new opportunities and collaborations.
-            </motion.p>
-            <motion.a
-              variants={fadeInUp}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="mailto:your.email@example.com"
-              className="inline-block px-8 py-3 rounded-full bg-primary text-white font-medium"
-            >
-              Say Hello
-            </motion.a>
-          </motion.div>
-        </div>
-      </section>
+      <Contact />
     </div>
   )
 } 
