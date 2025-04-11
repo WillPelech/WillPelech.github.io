@@ -8,13 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        .education-section {
+            border: 2px solid red; /* Debugging border */
+            padding: 2rem;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav id="nav-bar">
             <ul class="nav-links">
                 <li><a href="#welcome-section" class="nav-links">Welcome</a></li>
-                <li><a href="#projects" class="nav-links">Projects</a></li>
                 <li><a href="#contact" class="nav-links">Contact</a></li>
             </ul>
         </nav>
@@ -22,32 +29,42 @@
     <section id="welcome-section">
         <h1>Hello I'm Will and this is my portfolio</h1>
         <p>Computer Engineering student at NYU</p>
-    </section>     
+    </section>
     <section id="projects">
         <h1>These are some projects I have worked on</h1>
-    <div class="projects">
-        <a href="" class="project-tile">
-            <img src="./images/Screenshot 2023-12-16 at 11.11.35 AM.png" alt="">
-            <p><span>&lt;</span>Electric Formula One<span>/&gt;</span></p>
-        </a> 
-        <a href="https://www.youtube.com/watch?v=7fEODYLyOzs" class="project-tile">
-            <img src="./images/SensoSchematic.png" alt="">
-            <p><span>&lt;</span>Sensoswap, May 2022<span>/&gt;</span></p>
+        <div class="projects">
+            <a href="" class="project-tile">
+                <img src="./images/Screenshot 2023-12-16 at 11.11.35 AM.png" alt="">
+                <p><span>&lt;</span>Electric Formula One<span>/&gt;</span></p>
+            </a>
+            <a href="https://www.youtube.com/watch?v=7fEODYLyOzs" class="project-tile">
+                <img src="./images/SensoSchematic.png" alt="">
+                <p><span>&lt;</span>Sensoswap, May 2022<span>/&gt;</span></p>
+            </a>
+            <a href="https://www.youtube.com/watch?v=r7fxoS16woU" class="project-tile">
+                <img src="./images/baja_img.jpeg" alt="">
+                <p><span>&lt;</span>NYU Offroad Team, May 2022<span>/&gt;</span></p>
+            </a>
+        </div>
+        <a href="" class="show-all">
+            Show All
         </a>
-        <a href="https://www.youtube.com/watch?v=r7fxoS16woU" class="project-tile">
-            <img src="./images/baja_img.jpeg" alt="">
-            <p><span>&lt;</span>NYU Offroad Team, May 2022<span>/&gt;</span></p>
-        </a>
-    </div>
-    <a href="" class="show-all">
-        Show All
-    </a>
+    </section>
+    <section id="education" class="education-section animate__animated animate__fadeIn">
+        <h2>Education</h2>
+        <div class="education-item">
+            <h3>New York University (NYU)</h3>
+            <p>Bachelor of Science in Computer Engineering</p>
+            <p>Specialization: Quantum Computing</p>
+            <p>Graduation Year: 2025</p>
+        </div>
     </section>
     <section id="contact">
         <h1>Contact information:</h1>
         <p>Email:wpelech23@gmail.com</p>
         <p>Phone:720-469-6573</p>
         <p>Github: https://github.com/WillPelech </p>
+        <p>Portfolio: https://WillPelech.github.io</p>
     </section>
 </body>
 </html>
