@@ -9,7 +9,9 @@ const Education: React.FC = () => {
         <h3>New York University (NYU)</h3>
         <p>Bachelor of Science in Computer Engineering</p>
         <p>Specialization: Quantum Computing</p>
-        <p>Graduation Year: 2025</p>
+        <div className="graduation-year">
+          <p>Graduation Year: 2026</p>
+        </div>
       </div>
     </section>
   );
