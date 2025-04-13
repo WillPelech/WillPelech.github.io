@@ -1,9 +1,10 @@
 .education-section {
-  padding: 3rem 1rem;
-  background-color: #f4f4f9; /* Softer background color */
-  border-top: 2px solid #ddd;
-  border-bottom: 2px solid #ddd;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #f0f0f0; /* Light background color */
+  color: #333; /* Dark text color */
+  padding: 20px; /* Padding for spacing */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  animation: fadeIn 0.5s ease-in; /* Animation for fade-in effect */
 }
 
 .education-section h2 {
@@ -16,19 +17,14 @@
 }
 
 .education-item {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background-color: #ffffff; /* White card background */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Card shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 15px; /* Space between items */
 }
 
 .education-item:hover {
   transform: translateY(-5px); /* Lift effect on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
-#comment
+
 .education-item h3 {
   font-size: 1.8rem;
   color: #34495e; /* Slightly darker color */
@@ -46,4 +42,15 @@
 .education-item p:last-child {
   font-style: italic; /* Graduation year in italic */
   color: #95a5a6; /* Lighter color for less emphasis */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Slide in from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End position */
+  }
 }
