@@ -28,7 +28,7 @@
   transform: translateY(-5px); /* Lift effect on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
-
+#comment
 .education-item h3 {
   font-size: 1.8rem;
   color: #34495e; /* Slightly darker color */
