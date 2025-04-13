@@ -11,9 +11,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         .education-section {
-            border: 2px solid red; /* Debugging border */
-            padding: 2rem;
-            background-color: #f9f9f9;
+            background-color: #685f5f; /* Desired background color */
+            color: #fff; /* Text color for contrast */
+            padding: 20px; /* Padding for spacing */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            animation: fadeIn 0.5s ease-in; /* Animation for fade-in effect */
+            border: none; /* Ensure no border is applied */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Slide in from below */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* End position */
+            }
         }
     </style>
 </head>
@@ -56,7 +71,7 @@
             <h3>New York University (NYU)</h3>
             <p>Bachelor of Science in Computer Engineering</p>
             <p>Specialization: Quantum Computing</p>
-            <p>Graduation Year: 2025</p>
+            <p>Graduation Year: 2026</p>
         </div>
     </section>
     <section id="contact">
