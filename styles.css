@@ -744,6 +744,13 @@ code {
   margin: 0 auto;
 }
 
+/* Allow other projects to break out of section container */
+.section-container .other-projects {
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
 .section-title {
   margin: 0 0 40px;
   font-size: clamp(26px, 5vw, var(--fz-heading));
@@ -1124,14 +1131,14 @@ code {
 /* Featured Project Content */
 .project.featured .project-content {
   position: relative;
-  grid-column: 1 / 7;
+  grid-column: 1 / 6;
   grid-row: 1 / -1;
   z-index: 2;
 }
 
 @media (max-width: 1080px) {
   .project.featured .project-content {
-    grid-column: 1 / 9;
+    grid-column: 1 / 8;
   }
 }
 
@@ -1149,13 +1156,13 @@ code {
 
 /* Alternating featured projects */
 .project.featured:nth-of-type(2n) .project-content {
-  grid-column: 7 / -1;
+  grid-column: 8 / -1;
   text-align: right;
 }
 
 @media (max-width: 1080px) {
   .project.featured:nth-of-type(2n) .project-content {
-    grid-column: 5 / -1;
+    grid-column: 6 / -1;
   }
 }
 
@@ -1306,14 +1313,14 @@ code {
 
 /* Project Images */
 .project-image {
-  grid-column: 6 / -1;
+  grid-column: 7 / -1;
   grid-row: 1 / -1;
   position: relative;
   z-index: 1;
 }
 
 .project.featured:nth-of-type(2n) .project-image {
-  grid-column: 1 / 8;
+  grid-column: 1 / 7;
 }
 
 @media (max-width: 768px) {
@@ -1370,9 +1377,24 @@ code {
   line-height: 1.4;
 }
 
-/* Other Projects */
+/* Other Projects - Make them fill the full page width */
 .other-projects {
   margin-top: 150px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 0 max(50px, calc((100vw - 1400px) / 2));
+}
+
+@media (max-width: 1080px) {
+  .other-projects {
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .other-projects {
+    padding: 0 25px;
+  }
 }
 
 .other-projects h3 {
@@ -1386,21 +1408,29 @@ code {
 .projects-grid-small {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 25px;
+  gap: 30px;
   position: relative;
+  max-width: 1400px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
+  .projects-grid-small {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
   .projects-grid-small {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .projects-grid-small {
     grid-template-columns: 1fr;
     gap: 25px;
