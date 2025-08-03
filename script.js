@@ -5,22 +5,62 @@ const sections = document.querySelectorAll('section');
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabPanels = document.querySelectorAll('.tab-panel');
 
-// Navbar scroll effect
-let lastScrollTop = 0;
+// Loading animation on page load
+document.addEventListener('DOMContentLoaded', () => {
+  // Add loading class to trigger animations
+  const loadingElements = document.querySelectorAll('.loading');
+  loadingElements.forEach((element, index) => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(60px)';
+    
+    setTimeout(() => {
+      element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      element.style.opacity = '1';
+      element.style.transform = 'translateY(0)';
+    }, index * 100 + 200);
+  });
 
-window.addEventListener('scroll', () => {
+  // Set initial active tab
+  const firstTabButton = document.querySelector('.tab-button');
+  const firstTabPanel = document.querySelector('.tab-panel');
+  
+  if (firstTabButton && firstTabPanel) {
+    firstTabButton.classList.add('active');
+    firstTabPanel.classList.add('active');
+  }
+
+  // Initial animation check
+  animateOnScroll();
+  
+  // Add initial classes for smooth transitions
+  document.body.classList.add('loaded');
+});
+
+// Navbar scroll effect with improved performance
+let lastScrollTop = 0;
+let ticking = false;
+
+function updateNavbar() {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   
   if (scrollTop > 100) {
-    navbar.style.height = 'var(--nav-scroll-height)';
-    navbar.style.backgroundColor = 'rgba(10, 25, 47, 0.95)';
+    navbar.classList.add('scrolled');
   } else {
-    navbar.style.height = 'var(--nav-height)';
-    navbar.style.backgroundColor = 'rgba(10, 25, 47, 0.85)';
+    navbar.classList.remove('scrolled');
   }
   
   lastScrollTop = scrollTop;
-});
+  ticking = false;
+}
+
+function requestNavbarUpdate() {
+  if (!ticking) {
+    requestAnimationFrame(updateNavbar);
+    ticking = true;
+  }
+}
+
+window.addEventListener('scroll', requestNavbarUpdate);
 
 // Smooth scrolling for navigation links
 navLinks.forEach(link => {
@@ -35,11 +75,15 @@ navLinks.forEach(link => {
         top: offsetTop,
         behavior: 'smooth'
       });
+      
+      // Update active nav link
+      navLinks.forEach(navLink => navLink.classList.remove('active'));
+      link.classList.add('active');
     }
   });
 });
 
-// Tab functionality for experience section
+// Enhanced tab functionality for experience section
 tabButtons.forEach((button, index) => {
   button.addEventListener('click', () => {
     // Remove active class from all buttons and panels
@@ -53,27 +97,34 @@ tabButtons.forEach((button, index) => {
     
     if (targetPanel) {
       targetPanel.classList.add('active');
+      
+      // Add animation to panel content
+      targetPanel.style.opacity = '0';
+      targetPanel.style.transform = 'translateY(20px)';
+      
+      setTimeout(() => {
+        targetPanel.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        targetPanel.style.opacity = '1';
+        targetPanel.style.transform = 'translateY(0)';
+      }, 10);
     }
     
     // Update the green indicator position
     const tabContainer = document.querySelector('.experience-tabs');
-    const indicator = tabContainer.querySelector(':before') || tabContainer;
     
     if (window.innerWidth > 600) {
       // Desktop: vertical tabs
-      const buttonHeight = button.offsetHeight;
       const buttonTop = button.offsetTop;
       tabContainer.style.setProperty('--indicator-top', `${buttonTop}px`);
     } else {
       // Mobile: horizontal tabs
-      const buttonWidth = button.offsetWidth;
       const buttonLeft = button.offsetLeft;
       tabContainer.style.setProperty('--indicator-left', `${buttonLeft}px`);
     }
   });
 });
 
-// Intersection Observer for active nav links
+// Intersection Observer for active nav links with improved performance
 const observerOptions = {
   root: null,
   rootMargin: '-50% 0px -50% 0px',
@@ -102,7 +153,9 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Animation on scroll
+// Enhanced animation on scroll with throttling
+let animationTicking = false;
+
 const animateOnScroll = () => {
   const elements = document.querySelectorAll('.project, .about-content, .experience-content, .contact');
   
@@ -112,30 +165,48 @@ const animateOnScroll = () => {
     
     if (elementTop < window.innerHeight - elementVisible) {
       element.classList.add('animate');
+      element.style.opacity = '1';
+      element.style.transform = 'translateY(0)';
     }
   });
+  
+  animationTicking = false;
 };
 
-window.addEventListener('scroll', animateOnScroll);
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-  // Set initial active tab
-  const firstTabButton = document.querySelector('.tab-button');
-  const firstTabPanel = document.querySelector('.tab-panel');
-  
-  if (firstTabButton && firstTabPanel) {
-    firstTabButton.classList.add('active');
-    firstTabPanel.classList.add('active');
+function requestAnimationUpdate() {
+  if (!animationTicking) {
+    requestAnimationFrame(animateOnScroll);
+    animationTicking = true;
   }
+}
+
+window.addEventListener('scroll', requestAnimationUpdate);
+
+// Enhanced project hover effects
+const projectCards = document.querySelectorAll('.project.small .project-inner');
+projectCards.forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transform = 'translateY(-7px)';
+    card.style.transition = 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)';
+  });
   
-  // Initial animation check
-  animateOnScroll();
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'translateY(0)';
+  });
 });
 
-// Preloader (optional)
-window.addEventListener('load', () => {
-  document.body.classList.add('loaded');
+// Enhanced project image placeholder hover effects
+const projectPlaceholders = document.querySelectorAll('.project-image-placeholder');
+projectPlaceholders.forEach(placeholder => {
+  placeholder.addEventListener('mouseenter', () => {
+    placeholder.style.transform = 'translateY(-5px)';
+    placeholder.style.borderColor = 'var(--green)';
+  });
+  
+  placeholder.addEventListener('mouseleave', () => {
+    placeholder.style.transform = 'translateY(0)';
+    placeholder.style.borderColor = 'var(--lightest-navy)';
+  });
 });
 
 // Handle resize for tab indicator
@@ -155,11 +226,11 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Email copy functionality (optional)
+// Enhanced email functionality
 const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
 emailLinks.forEach(link => {
   link.addEventListener('click', (e) => {
-    // You can add email copy to clipboard functionality here if desired
+    // Optional: Add analytics tracking or other functionality here
     console.log('Email link clicked:', link.href);
   });
 });
@@ -178,5 +249,89 @@ if (logo) {
   logo.addEventListener('click', (e) => {
     e.preventDefault();
     scrollToTop();
+  });
+}
+
+// Add hover effects for navigation links
+navLinks.forEach(link => {
+  link.addEventListener('mouseenter', () => {
+    link.style.color = 'var(--green)';
+  });
+  
+  link.addEventListener('mouseleave', () => {
+    if (!link.classList.contains('active')) {
+      link.style.color = 'var(--lightest-slate)';
+    }
+  });
+});
+
+// Enhanced social links hover effects
+const socialLinks = document.querySelectorAll('.social-links a');
+socialLinks.forEach(link => {
+  link.addEventListener('mouseenter', () => {
+    link.style.color = 'var(--green)';
+    link.style.transform = 'translateY(-3px)';
+  });
+  
+  link.addEventListener('mouseleave', () => {
+    link.style.color = 'var(--light-slate)';
+    link.style.transform = 'translateY(0)';
+  });
+});
+
+// Add typing effect for hero section (optional enhancement)
+function typeWriter(element, text, speed = 50) {
+  let i = 0;
+  element.innerHTML = '';
+  
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  
+  type();
+}
+
+// Preloader enhancement
+window.addEventListener('load', () => {
+  document.body.classList.add('loaded');
+  
+  // Optional: Add a subtle entrance animation for the entire page
+  const mainContent = document.getElementById('content');
+  if (mainContent) {
+    mainContent.style.opacity = '1';
+    mainContent.style.transform = 'translateY(0)';
+  }
+});
+
+// Add focus management for accessibility
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    document.body.classList.add('using-keyboard');
+  }
+});
+
+document.addEventListener('mousedown', () => {
+  document.body.classList.remove('using-keyboard');
+});
+
+// Initialize counter for section numbering
+let sectionCounter = 0;
+const numberedSections = document.querySelectorAll('.section-title');
+numberedSections.forEach(section => {
+  sectionCounter++;
+});
+
+// Enhanced performance monitoring (optional)
+if ('performance' in window) {
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const perfData = window.performance.timing;
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+      console.log(`Page load time: ${pageLoadTime}ms`);
+    }, 0);
   });
 } 

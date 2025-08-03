@@ -40,10 +40,10 @@
     <!-- Social Links -->
     <div class="social-links">
         <ul>
-            <li><a href="https://github.com/WillPelech" target="_blank"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/will-pelech" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="mailto:wep9428@nyu.edu"><i class="fas fa-envelope"></i></a></li>
-            <li><a href="tel:720-469-6573"><i class="fas fa-phone"></i></a></li>
+            <li><a href="https://github.com/WillPelech" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/will-pelech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="mailto:wep9428@nyu.edu" aria-label="Email"><i class="fas fa-envelope"></i></a></li>
+            <li><a href="tel:720-469-6573" aria-label="Phone"><i class="fas fa-phone"></i></a></li>
         </ul>
     </div>
 
@@ -56,16 +56,16 @@
     <main id="content">
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="hero-content">
-                <p class="hero-greeting">Hi, my name is</p>
-                <h1 class="hero-name">Will Pelech.</h1>
-                <h2 class="hero-title">I build scalable systems and solve complex problems.</h2>
-                <p class="hero-description">
+            <div class="hero-content loading">
+                <p class="hero-greeting loading delay-1">Hi, my name is</p>
+                <h1 class="hero-name loading delay-2">Will Pelech.</h1>
+                <h2 class="hero-title loading delay-3">I build scalable systems and solve complex problems.</h2>
+                <p class="hero-description loading delay-4">
                     I'm a Computer Engineering student at NYU with a passion for quantum computing, distributed systems, 
                     and ML infrastructure. Currently focused on building scalable data pipelines and exploring the 
                     intersection of quantum and classical computing.
                 </p>
-                <a href="#projects" class="hero-cta">Check out my work!</a>
+                <a href="#projects" class="hero-cta loading delay-5">Check out my work!</a>
             </div>
         </section>
 
@@ -111,7 +111,11 @@
                     </div>
                     <div class="about-image">
                         <div class="image-wrapper">
-                            <img src="./images/profile.jpg" alt="Will Pelech" />
+                            <div class="project-image-placeholder">
+                                <i class="fas fa-user project-placeholder-icon"></i>
+                                <div class="project-placeholder-title">Will Pelech</div>
+                                <div class="project-placeholder-subtitle">Software Engineer</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -233,7 +237,11 @@
                         </div>
                         <div class="project-image">
                             <a href="https://github.com/WillPelech/AxolotlDatabaseProject" target="_blank">
-                                <img src="./images/Screenshot 2023-12-16 at 11.11.35 AM.png" alt="Axolotl Database Project" />
+                                <div class="project-image-placeholder">
+                                    <i class="fas fa-database project-placeholder-icon"></i>
+                                    <div class="project-placeholder-title">Restaurant Platform</div>
+                                    <div class="project-placeholder-subtitle">Full-Stack Web App</div>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -270,7 +278,11 @@
                         </div>
                         <div class="project-image">
                             <a href="https://github.com/cfgjc24/Team-5" target="_blank">
-                                <img src="./images/SensoSchematic.png" alt="Lodestar Navigation Dashboard" />
+                                <div class="project-image-placeholder">
+                                    <i class="fas fa-map-marked-alt project-placeholder-icon"></i>
+                                    <div class="project-placeholder-title">Safety Dashboard</div>
+                                    <div class="project-placeholder-subtitle">Real-time Monitoring</div>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -282,6 +294,9 @@
                             <div class="project small">
                                 <div class="project-inner">
                                     <div class="project-top">
+                                        <div class="folder">
+                                            <i class="fas fa-folder project-placeholder-icon"></i>
+                                        </div>
                                         <div class="project-links">
                                             <a href="https://www.youtube.com/watch?v=r7fxoS16woU" target="_blank" aria-label="External Link">
                                                 <i class="fab fa-youtube"></i>
@@ -306,6 +321,9 @@
                             <div class="project small">
                                 <div class="project-inner">
                                     <div class="project-top">
+                                        <div class="folder">
+                                            <i class="fas fa-folder project-placeholder-icon"></i>
+                                        </div>
                                         <div class="project-links">
                                             <a href="https://www.youtube.com/watch?v=7fEODYLyOzs" target="_blank" aria-label="External Link">
                                                 <i class="fab fa-youtube"></i>
@@ -323,6 +341,33 @@
                                     <ul class="project-tech-list">
                                         <li>IoT</li>
                                         <li>Sensor Networks</li>
+                                        <li>Embedded Systems</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project small">
+                                <div class="project-inner">
+                                    <div class="project-top">
+                                        <div class="folder">
+                                            <i class="fas fa-folder project-placeholder-icon"></i>
+                                        </div>
+                                        <div class="project-links">
+                                            <a href="#" aria-label="GitHub Link">
+                                                <i class="fab fa-github"></i>
+                                            </a>
+                                            <a href="#" aria-label="External Link">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="project-title">Formula One Electronics</h4>
+                                    <p class="project-description">
+                                        Embedded systems design for high-performance electric racing vehicles. 
+                                        STM32-based control systems with real-time sensor monitoring.
+                                    </p>
+                                    <ul class="project-tech-list">
+                                        <li>C++</li>
+                                        <li>STM32</li>
                                         <li>Embedded Systems</li>
                                     </ul>
                                 </div>
