@@ -3,83 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will's Portfolio</title>
+    <title>Will Pelech | Software Engineer</title>
     <link rel="stylesheet" href="./styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500&family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
-        .education-section {
-            background-color: #685f5f; /* Desired background color */
-            color: #fff; /* Text color for contrast */
-            padding: 20px; /* Padding for spacing */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            animation: fadeIn 0.5s ease-in; /* Animation for fade-in effect */
-            border: none; /* Ensure no border is applied */
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px); /* Slide in from below */
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0); /* End position */
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav id="nav-bar">
-            <ul class="nav-links">
-                <li><a href="#welcome-section" class="nav-links">Welcome</a></li>
-                <li><a href="#contact" class="nav-links">Contact</a></li>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">WP</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#experience" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./resume.pdf" class="nav-link resume-btn" target="_blank">Resume</a>
+                </li>
             </ul>
-        </nav>
-    </header>
-    <section id="welcome-section">
-        <h1>Hello I'm Will and this is my portfolio</h1>
-        <p>Computer Engineering student at NYU</p>
-    </section>
-    <section id="projects">
-        <h1>These are some projects I have worked on</h1>
-        <div class="projects">
-            <a href="" class="project-tile">
-                <img src="./images/Screenshot 2023-12-16 at 11.11.35 AM.png" alt="">
-                <p><span>&lt;</span>Electric Formula One<span>/&gt;</span></p>
-            </a>
-            <a href="https://www.youtube.com/watch?v=7fEODYLyOzs" class="project-tile">
-                <img src="./images/SensoSchematic.png" alt="">
-                <p><span>&lt;</span>Sensoswap, May 2022<span>/&gt;</span></p>
-            </a>
-            <a href="https://www.youtube.com/watch?v=r7fxoS16woU" class="project-tile">
-                <img src="./images/baja_img.jpeg" alt="">
-                <p><span>&lt;</span>NYU Offroad Team, May 2022<span>/&gt;</span></p>
+        </div>
+    </nav>
+
+    <!-- Social Links -->
+    <div class="social-links">
+        <ul>
+            <li><a href="https://github.com/WillPelech" target="_blank"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/will-pelech" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="mailto:wep9428@nyu.edu"><i class="fas fa-envelope"></i></a></li>
+            <li><a href="tel:720-469-6573"><i class="fas fa-phone"></i></a></li>
+        </ul>
+    </div>
+
+    <!-- Email Side -->
+    <div class="email-side">
+        <a href="mailto:wep9428@nyu.edu">wep9428@nyu.edu</a>
+    </div>
+
+    <!-- Main Content -->
+    <main id="content">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <p class="hero-greeting">Hi, my name is</p>
+                <h1 class="hero-name">Will Pelech.</h1>
+                <h2 class="hero-title">I build scalable systems and solve complex problems.</h2>
+                <p class="hero-description">
+                    I'm a Computer Engineering student at NYU with a passion for quantum computing, distributed systems, 
+                    and ML infrastructure. Currently focused on building scalable data pipelines and exploring the 
+                    intersection of quantum and classical computing.
+                </p>
+                <a href="#projects" class="hero-cta">Check out my work!</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="section-container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            Hello! I'm Will, a Computer Engineering student at New York University with a Minor in Quantum Technology. 
+                            My journey into technology began with a fascination for how systems work at scale, which led me to explore 
+                            everything from quantum computing to distributed data processing.
+                        </p>
+                        <p>
+                            I've had the privilege of working as a Software Engineer Intern at LinkedIn, where I implemented scalable 
+                            Apache Airflow workflows and optimized Spark-based data processing pipelines. I also gained valuable 
+                            experience in embedded systems and precision engineering at Physik Instrumente, working with FFT algorithms 
+                            and machine learning for nano-scale positioning.
+                        </p>
+                        <p>
+                            Currently, I'm a Teaching Assistant at NYU, mentoring over 100 students in computer science fundamentals, 
+                            and working as a Senior Engineer on the NYU Formula One Team, where I design embedded systems for 
+                            high-performance vehicles.
+                        </p>
+                        <p>Here are some technologies I've been working with recently:</p>
+                        <ul class="skills-list">
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>Scala</li>
+                            <li>C++/C</li>
+                            <li>JavaScript</li>
+                            <li>Golang</li>
+                            <li>Apache Spark</li>
+                            <li>Apache Airflow</li>
+                            <li>PyTorch</li>
+                            <li>TensorFlow</li>
+                            <li>React</li>
+                            <li>AWS</li>
+                            <li>Qiskit</li>
+                            <li>OpenHouse</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-wrapper">
+                            <img src="./images/profile.jpg" alt="Will Pelech" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience">
+            <div class="section-container">
+                <h2 class="section-title">Where I've Worked</h2>
+                <div class="experience-content">
+                    <div class="experience-tabs">
+                        <button class="tab-button active" data-tab="linkedin">LinkedIn</button>
+                        <button class="tab-button" data-tab="physik">Physik Instrumente</button>
+                        <button class="tab-button" data-tab="nyu-ta">NYU TA</button>
+                        <button class="tab-button" data-tab="siil">Student Impact</button>
+                        <button class="tab-button" data-tab="nyu-f1">NYU Formula</button>
+                        <button class="tab-button" data-tab="education">Education</button>
+                    </div>
+                    <div class="experience-panels">
+                        <div class="tab-panel active" id="linkedin">
+                            <h3>Software Engineer Intern <span class="company">@ LinkedIn</span></h3>
+                            <p class="experience-range">May 2025 - August 2025</p>
+                            <ul>
+                                <li>Implemented scalable Apache Airflow workflows to automate the migration and transformation of over 112 terabytes of identity data from HDFS to OpenHouse</li>
+                                <li>Optimized Spark-based data processing pipelines by refactoring partitioning logic, cutting end-to-end latency by 7 hours and reducing data freshness lag by 6 hours</li>
+                                <li>Reduced data overhead by 60% through strategic schema optimization and column pruning, resulting in a 22% boost in I/O query throughput</li>
+                                <li>Enabled parallel job execution and direct access for downstream consumers with improved reporting dashboard performance</li>
+                            </ul>
+                        </div>
+                        <div class="tab-panel" id="physik">
+                            <h3>Software Engineering & Mechatronics Intern <span class="company">@ Physik Instrumente</span></h3>
+                            <p class="experience-range">May 2024 - August 2024</p>
+                            <ul>
+                                <li>Streamlined position correcting algorithm utilizing Z-Transforms and Fast Fourier Transforms (FFT) for real-time mixed signal analysis</li>
+                                <li>Reduced positional errors by over 30% through advanced signal processing techniques</li>
+                                <li>Fixed critical positioning errors by applying harmonic wave cancellation algorithm with ML-based noise reduction</li>
+                                <li>Achieved sub-40 nanometer precision, decreasing position error by over 80% and significantly improving motion accuracy</li>
+                            </ul>
+                        </div>
+                        <div class="tab-panel" id="nyu-ta">
+                            <h3>Teaching Assistant <span class="company">@ New York University</span></h3>
+                            <p class="experience-range">February 2024 - August 2025</p>
+                            <ul>
+                                <li>Coordinated lectures across 5 departments, introducing over 100 students to foundational computer science concepts</li>
+                                <li>Mentored students in programming fundamentals, data structures, algorithms, and software engineering practices</li>
+                                <li>Developed and graded assignments, provided one-on-one tutoring, and held regular office hours</li>
+                                <li>Assisted professors with course material preparation and maintained high student satisfaction ratings</li>
+                            </ul>
+                        </div>
+                        <div class="tab-panel" id="siil">
+                            <h3>Embedded Systems Engineer <span class="company">@ Student Impact Innovation Lab</span></h3>
+                            <p class="experience-range">June 2023 - January 2024</p>
+                            <ul>
+                                <li>Prototyped heart rate monitor by designing embedded software in C and manufacturing custom circuit boards</li>
+                                <li>Reduced hardware development time by 50% using LPKF milling and rapid iteration on breadboards</li>
+                                <li>Designed compact electrocardiogram (ECG) system with over 20 discrete components using KiCad</li>
+                                <li>Developed Python-based user interface with PlatformIO to visualize signals leveraging microcontroller capabilities</li>
+                            </ul>
+                        </div>
+                        <div class="tab-panel" id="nyu-f1">
+                            <h3>Senior Engineer <span class="company">@ NYU Formula One Team</span></h3>
+                            <p class="experience-range">June 2023 - Present</p>
+                            <ul>
+                                <li>Designed modular template board using STM32 microcontroller integrated with 10 safety sensors</li>
+                                <li>Reduced system fault detection time by 40% forming the foundation of the electronic control system</li>
+                                <li>Built RPM sensing system using Hall effect sensors and developed real-time monitoring dashboard</li>
+                                <li>Increased drivetrain testing accuracy by 30% enabling live performance visibility during high-speed runs</li>
+                            </ul>
+                        </div>
+                        <div class="tab-panel" id="education">
+                            <h3>Bachelor of Science in Computer Engineering <span class="company">@ New York University</span></h3>
+                            <p class="experience-range">Expected December 2026</p>
+                            <ul>
+                                <li><strong>GPA:</strong> 3.93/4.0</li>
+                                <li><strong>Minor:</strong> Quantum Technology</li>
+                                <li><strong>Awards:</strong> Tandon Scholarship, Tau Beta Pi, Dean's List (2022-2025)</li>
+                                <li><strong>Coursework:</strong> Quantum Machine Learning, Quantum Math Methods, Data Structures and Algorithms, Object Oriented Programming, Digital Logic, Differential Equations, Linear Algebra, Discrete Mathematics, Data Analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="section-container">
+                <h2 class="section-title">Some Things I've Built</h2>
+                <div class="projects-grid">
+                    <!-- Featured Project 1 -->
+                    <div class="project featured">
+                        <div class="project-content">
+                            <div class="project-overline">Featured Project</div>
+                            <h3 class="project-title">Axolotl Database Project</h3>
+                            <div class="project-description">
+                                <p>
+                                    A full-stack restaurant discovery and ordering platform built with React, Flask, and MySQL. 
+                                    Features Google Maps API integration for location services, real-time order tracking, 
+                                    user reviews and ratings, and a comprehensive restaurant management system.
+                                </p>
+                            </div>
+                            <ul class="project-tech-list">
+                                <li>Flask</li>
+                                <li>JavaScript</li>
+                                <li>React</li>
+                                <li>Python</li>
+                                <li>MySQL</li>
+                                <li>Google Maps API</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://github.com/WillPelech/AxolotlDatabaseProject" target="_blank" aria-label="GitHub Link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://github.com/WillPelech/AxolotlDatabaseProject" target="_blank" aria-label="External Link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <a href="https://github.com/WillPelech/AxolotlDatabaseProject" target="_blank">
+                                <img src="./images/Screenshot 2023-12-16 at 11.11.35 AM.png" alt="Axolotl Database Project" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Featured Project 2 -->
+                    <div class="project featured">
+                        <div class="project-content">
+                            <div class="project-overline">Featured Project</div>
+                            <h3 class="project-title">Lodestar Navigation Dashboard</h3>
+                            <div class="project-description">
+                                <p>
+                                    A real-time supervisor dashboard built during JPMorgan Code for Good hackathon for monitoring 
+                                    employee safety during client visits. Features live location tracking, emergency notifications, 
+                                    check-in systems, and meeting extension requests - all built within 24 hours.
+                                </p>
+                            </div>
+                            <ul class="project-tech-list">
+                                <li>React</li>
+                                <li>TypeScript</li>
+                                <li>Node.js</li>
+                                <li>Express.js</li>
+                                <li>Tailwind CSS</li>
+                                <li>Google Maps API</li>
+                                <li>Cloud Firestore</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://github.com/cfgjc24/Team-5" target="_blank" aria-label="GitHub Link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://github.com/cfgjc24/Team-5" target="_blank" aria-label="External Link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <a href="https://github.com/cfgjc24/Team-5" target="_blank">
+                                <img src="./images/SensoSchematic.png" alt="Lodestar Navigation Dashboard" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Other Notable Projects -->
+                    <div class="other-projects">
+                        <h3>Other Noteworthy Projects</h3>
+                        <div class="projects-grid-small">
+                            <div class="project small">
+                                <div class="project-inner">
+                                    <div class="project-top">
+                                        <div class="project-links">
+                                            <a href="https://www.youtube.com/watch?v=r7fxoS16woU" target="_blank" aria-label="External Link">
+                                                <i class="fab fa-youtube"></i>
+                                            </a>
+                                            <a href="#" aria-label="GitHub Link">
+                                                <i class="fab fa-github"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="project-title">NYU Offroad Team</h4>
+                                    <p class="project-description">
+                                        Engineering contributions to NYU's competitive offroad vehicle team. 
+                                        Worked on suspension systems, drivetrain optimization, and vehicle dynamics.
+                                    </p>
+                                    <ul class="project-tech-list">
+                                        <li>Mechanical Engineering</li>
+                                        <li>CAD Design</li>
+                                        <li>Team Collaboration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project small">
+                                <div class="project-inner">
+                                    <div class="project-top">
+                                        <div class="project-links">
+                                            <a href="https://www.youtube.com/watch?v=7fEODYLyOzs" target="_blank" aria-label="External Link">
+                                                <i class="fab fa-youtube"></i>
+                                            </a>
+                                            <a href="#" aria-label="GitHub Link">
+                                                <i class="fab fa-github"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="project-title">Sensoswap Technology</h4>
+                                    <p class="project-description">
+                                        Innovative sensor technology for automotive applications. Created a modular 
+                                        sensor system for real-time automotive environments.
+                                    </p>
+                                    <ul class="project-tech-list">
+                                        <li>IoT</li>
+                                        <li>Sensor Networks</li>
+                                        <li>Embedded Systems</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="section-container">
+                <h2 class="section-title">What's Next?</h2>
+                <h3 class="contact-title">Get In Touch</h3>
+                <p class="contact-description">
+                    I'm currently looking for new opportunities in software engineering, particularly in distributed systems, 
+                    ML infrastructure, or quantum computing. Whether you have a question or just want to say hi, 
+                    I'll try my best to get back to you!
+                </p>
+                <a href="mailto:wep9428@nyu.edu" class="contact-btn">Say Hello</a>
+                <div class="contact-info">
+                    <p>Email: wep9428@nyu.edu</p>
+                    <p>Phone: 720-469-6573</p>
+                    <p>LinkedIn: <a href="https://www.linkedin.com/in/will-pelech" target="_blank">linkedin.com/in/will-pelech</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="https://github.com/WillPelech" target="_blank">
+                <p>Built by Will Pelech</p>
             </a>
         </div>
-        <a href="" class="show-all">
-            Show All
-        </a>
-    </section>
-    <section id="education" class="education-section animate__animated animate__fadeIn">
-        <h2>Education</h2>
-        <div class="education-item">
-            <h3>New York University (NYU)</h3>
-            <p>Bachelor of Science in Computer Engineering</p>
-            <p>Specialization: Quantum Computing</p>
-            <p>Graduation Year: 2026</p>
-        </div>
-    </section>
-    <section id="contact">
-        <h1>Contact information:</h1>
-        <p>Email:wpelech23@gmail.com</p>
-        <p>Phone:720-469-6573</p>
-        <p>Github: https://github.com/WillPelech </p>
-        <p>Portfolio: https://WillPelech.github.io</p>
-    </section>
+    </footer>
+
+    <script src="./script.js"></script>
 </body>
 </html>
