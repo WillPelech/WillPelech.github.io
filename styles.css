@@ -1131,14 +1131,16 @@ code {
 /* Featured Project Content */
 .project.featured .project-content {
   position: relative;
-  grid-column: 1 / 6;
+  grid-column: 1 / 5;
   grid-row: 1 / -1;
   z-index: 2;
+  padding-right: 20px;
 }
 
 @media (max-width: 1080px) {
   .project.featured .project-content {
-    grid-column: 1 / 8;
+    grid-column: 1 / 7;
+    padding-right: 15px;
   }
 }
 
@@ -1156,13 +1158,16 @@ code {
 
 /* Alternating featured projects */
 .project.featured:nth-of-type(2n) .project-content {
-  grid-column: 8 / -1;
+  grid-column: 9 / -1;
   text-align: right;
+  padding-left: 20px;
+  padding-right: 0;
 }
 
 @media (max-width: 1080px) {
   .project.featured:nth-of-type(2n) .project-content {
-    grid-column: 6 / -1;
+    grid-column: 7 / -1;
+    padding-left: 15px;
   }
 }
 
@@ -1170,6 +1175,7 @@ code {
   .project.featured:nth-of-type(2n) .project-content {
     grid-column: 1 / -1;
     text-align: left;
+    padding-left: 0;
   }
 }
 
@@ -1313,14 +1319,14 @@ code {
 
 /* Project Images */
 .project-image {
-  grid-column: 7 / -1;
+  grid-column: 6 / -1;
   grid-row: 1 / -1;
   position: relative;
   z-index: 1;
 }
 
 .project.featured:nth-of-type(2n) .project-image {
-  grid-column: 1 / 7;
+  grid-column: 1 / 8;
 }
 
 @media (max-width: 768px) {
@@ -1377,23 +1383,25 @@ code {
   line-height: 1.4;
 }
 
-/* Other Projects - Make them fill the full page width */
+/* Other Projects - Full Width Single Container */
 .other-projects {
   margin-top: 150px;
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding: 0 max(50px, calc((100vw - 1400px) / 2));
+  padding: 80px max(50px, calc((100vw - 1400px) / 2));
+  background-color: var(--navy);
+  position: relative;
 }
 
 @media (max-width: 1080px) {
   .other-projects {
-    padding: 0 50px;
+    padding: 80px 50px;
   }
 }
 
 @media (max-width: 768px) {
   .other-projects {
-    padding: 0 25px;
+    padding: 60px 25px;
   }
 }
 
@@ -1410,27 +1418,13 @@ code {
   padding: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   position: relative;
-  max-width: 1400px;
-}
-
-@media (max-width: 1200px) {
-  .projects-grid-small {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 25px;
-  }
+  max-width: 1200px;
 }
 
 @media (max-width: 768px) {
-  .projects-grid-small {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-}
-
-@media (max-width: 480px) {
   .projects-grid-small {
     grid-template-columns: 1fr;
     gap: 25px;
@@ -1438,14 +1432,14 @@ code {
 }
 
 .project.small {
-  cursor: default;
+  cursor: pointer;
   transition: var(--transition);
   height: 100%;
 }
 
 .project.small:hover,
 .project.small:focus-within {
-  transform: translateY(-7px);
+  transform: translateY(-10px);
 }
 
 .project.small .project-inner {
@@ -1456,23 +1450,26 @@ code {
   align-items: flex-start;
   position: relative;
   height: 100%;
-  min-height: 320px;
-  padding: 2rem 1.75rem;
+  min-height: 300px;
+  padding: 2.5rem 2rem;
   border-radius: var(--border-radius);
   background-color: var(--light-navy);
   transition: var(--transition);
+  border: 1px solid var(--lightest-navy);
 }
 
 .project.small .project-inner:hover,
 .project.small .project-inner:focus {
-  box-shadow: 0 20px 30px -15px var(--navy-shadow);
+  box-shadow: 0 20px 40px -15px var(--navy-shadow);
+  border-color: var(--green);
+  background-color: var(--lightest-navy);
 }
 
 .project-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   width: 100%;
 }
 
@@ -1497,6 +1494,7 @@ code {
 .project.small .project-title a {
   position: static;
   color: inherit;
+  text-decoration: none;
 }
 
 .project.small .project-title a:before {
@@ -1518,9 +1516,7 @@ code {
   padding: 0;
   margin: 0 0 auto 0;
   flex-grow: 1;
-  min-height: 50px;
-  max-height: 80px;
-  overflow: hidden;
+  min-height: 60px;
 }
 
 .project.small .project-tech-list {
@@ -1528,7 +1524,7 @@ code {
   align-items: flex-end;
   flex-wrap: wrap;
   padding: 0;
-  margin: 20px 0 0 0;
+  margin: 25px 0 0 0;
   list-style: none;
   width: 100%;
   margin-top: auto;
