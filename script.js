@@ -5,6 +5,96 @@ const sections = document.querySelectorAll('section');
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabPanels = document.querySelectorAll('.tab-panel');
 
+// Project scroll functionality
+let currentProjectIndex = 0;
+const projects = document.querySelectorAll('.project.small');
+const projectsGrid = document.getElementById('projectsGrid');
+const scrollDots = document.querySelectorAll('.scroll-dot');
+const projectsContainer = document.querySelector('.projects-scroll-container');
+
+// Project navigation functions
+function scrollProjects(direction) {
+  if (direction === 'left') {
+    currentProjectIndex = Math.max(0, currentProjectIndex - 1);
+  } else {
+    currentProjectIndex = Math.min(projects.length - 1, currentProjectIndex + 1);
+  }
+  updateProjectDisplay();
+}
+
+function scrollToProject(index) {
+  currentProjectIndex = Math.max(0, Math.min(projects.length - 1, index));
+  updateProjectDisplay();
+}
+
+function updateProjectDisplay() {
+  // Update project positions for desktop
+  if (window.innerWidth > 768) {
+    const offset = currentProjectIndex * -410; // 380px width + 30px gap
+    projectsGrid.style.transform = `translate(calc(-50% + ${offset}px), -50%)`;
+  }
+  
+  // Update active states
+  projects.forEach((project, index) => {
+    project.classList.toggle('active', index === currentProjectIndex);
+  });
+  
+  // Update scroll dots
+  scrollDots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentProjectIndex);
+  });
+}
+
+function openProject(url) {
+  if (url && url !== '#') {
+    window.open(url, '_blank');
+  }
+}
+
+// Mouse wheel scroll for projects section
+function handleProjectScroll(event) {
+  if (!projectsContainer) return;
+  
+  const rect = projectsContainer.getBoundingClientRect();
+  const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+  
+  if (isInView && window.innerWidth > 768) {
+    event.preventDefault();
+    
+    if (event.deltaY > 0) {
+      // Scroll down - next project
+      scrollProjects('right');
+    } else {
+      // Scroll up - previous project
+      scrollProjects('left');
+    }
+  }
+}
+
+// Keyboard navigation for projects
+function handleProjectKeyboard(event) {
+  if (!projectsContainer) return;
+  
+  const rect = projectsContainer.getBoundingClientRect();
+  const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+  
+  if (isInView) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      scrollProjects('left');
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      scrollProjects('right');
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      const activeProject = projects[currentProjectIndex];
+      if (activeProject) {
+        activeProject.click();
+      }
+    }
+  }
+}
+
 // Loading animation on page load
 document.addEventListener('DOMContentLoaded', () => {
   // Add loading class to trigger animations
@@ -31,6 +121,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial animation check
   animateOnScroll();
+  
+  // Initialize project navigation
+  if (projectsContainer) {
+    updateProjectDisplay();
+    
+    // Add wheel event listener for project scrolling
+    projectsContainer.addEventListener('wheel', handleProjectScroll, { passive: false });
+    
+    // Add keyboard event listener
+    document.addEventListener('keydown', handleProjectKeyboard);
+    
+    // Add touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+    
+    projectsContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    
+    projectsContainer.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      
+      if (Math.abs(diff) > 50) { // Minimum swipe distance
+        if (diff > 0) {
+          scrollProjects('right');
+        } else {
+          scrollProjects('left');
+        }
+      }
+    });
+  }
   
   // Add initial classes for smooth transitions
   document.body.classList.add('loaded');
@@ -211,11 +333,43 @@ projectPlaceholders.forEach(placeholder => {
 
 // Handle resize for tab indicator
 window.addEventListener('resize', () => {
+  if (projectsContainer) {
+    updateProjectDisplay();
+  }
+  
   const activeTab = document.querySelector('.tab-button.active');
   if (activeTab) {
     activeTab.click(); // Trigger click to update indicator position
   }
 });
+
+// Auto-scroll projects (optional - can be enabled/disabled)
+let autoScrollEnabled = false;
+let autoScrollInterval;
+
+function startAutoScroll() {
+  if (autoScrollEnabled && window.innerWidth > 768) {
+    autoScrollInterval = setInterval(() => {
+      currentProjectIndex = (currentProjectIndex + 1) % projects.length;
+      updateProjectDisplay();
+    }, 4000); // Change project every 4 seconds
+  }
+}
+
+function stopAutoScroll() {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+  }
+}
+
+// Enable auto-scroll when not interacting
+if (projectsContainer) {
+  projectsContainer.addEventListener('mouseenter', stopAutoScroll);
+  projectsContainer.addEventListener('mouseleave', startAutoScroll);
+  
+  // Start auto-scroll initially (optional)
+  // startAutoScroll();
+}
 
 // Add CSS custom properties for dynamic indicator positioning
 const style = document.createElement('style');

@@ -292,86 +292,84 @@
             <!-- Other Notable Projects - Full Width Section -->
             <div class="other-projects">
                 <h3>Other Noteworthy Projects</h3>
-                <div class="projects-grid-small">
-                    <div class="project small">
-                        <div class="project-inner">
-                            <div class="project-top">
-                                <div class="folder">
-                                    <i class="fas fa-folder"></i>
+                
+                <!-- Scroll Container -->
+                <div class="projects-scroll-container">
+                    <!-- Left Arrow -->
+                    <div class="scroll-arrow left" onclick="scrollProjects('left')">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    
+                    <!-- Right Arrow -->
+                    <div class="scroll-arrow right" onclick="scrollProjects('right')">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <!-- Projects Grid -->
+                    <div class="projects-grid-small" id="projectsGrid">
+                        <div class="project small" onclick="openProject('https://www.youtube.com/watch?v=r7fxoS16woU')">
+                            <div class="project-inner">
+                                <div class="project-top">
+                                    <div class="folder">
+                                        <i class="fas fa-car"></i>
+                                    </div>
                                 </div>
-                                <div class="project-links">
-                                    <a href="https://www.youtube.com/watch?v=r7fxoS16woU" target="_blank" aria-label="YouTube Link">
-                                        <i class="fab fa-youtube"></i>
-                                    </a>
-                                    <a href="#" aria-label="GitHub Link">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
+                                <h4 class="project-title">NYU Offroad Team</h4>
+                                <p class="project-description">
+                                    Competitive offroad vehicle engineering with focus on suspension and drivetrain systems.
+                                </p>
+                                <ul class="project-tech-list">
+                                    <li>Mechanical Engineering</li>
+                                    <li>CAD Design</li>
+                                    <li>Team Leadership</li>
+                                </ul>
                             </div>
-                            <h4 class="project-title">NYU Offroad Team</h4>
-                            <p class="project-description">
-                                Competitive offroad vehicle engineering with focus on suspension and drivetrain systems.
-                            </p>
-                            <ul class="project-tech-list">
-                                <li>Mechanical Engineering</li>
-                                <li>CAD Design</li>
-                                <li>Team Leadership</li>
-                            </ul>
+                        </div>
+                        
+                        <div class="project small" onclick="openProject('https://www.youtube.com/watch?v=7fEODYLyOzs')">
+                            <div class="project-inner">
+                                <div class="project-top">
+                                    <div class="folder">
+                                        <i class="fas fa-microchip"></i>
+                                    </div>
+                                </div>
+                                <h4 class="project-title">Sensoswap Technology</h4>
+                                <p class="project-description">
+                                    Modular sensor technology for automotive IoT applications.
+                                </p>
+                                <ul class="project-tech-list">
+                                    <li>IoT</li>
+                                    <li>Sensor Networks</li>
+                                    <li>Embedded Systems</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="project small" onclick="openProject('#')">
+                            <div class="project-inner">
+                                <div class="project-top">
+                                    <div class="folder">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                </div>
+                                <h4 class="project-title">Formula One Electronics</h4>
+                                <p class="project-description">
+                                    STM32-based control systems for high-performance electric racing vehicles.
+                                </p>
+                                <ul class="project-tech-list">
+                                    <li>C++</li>
+                                    <li>STM32</li>
+                                    <li>Real-time Systems</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="project small">
-                        <div class="project-inner">
-                            <div class="project-top">
-                                <div class="folder">
-                                    <i class="fas fa-folder"></i>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://www.youtube.com/watch?v=7fEODYLyOzs" target="_blank" aria-label="YouTube Link">
-                                        <i class="fab fa-youtube"></i>
-                                    </a>
-                                    <a href="#" aria-label="GitHub Link">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <h4 class="project-title">Sensoswap Technology</h4>
-                            <p class="project-description">
-                                Modular sensor technology for automotive IoT applications.
-                            </p>
-                            <ul class="project-tech-list">
-                                <li>IoT</li>
-                                <li>Sensor Networks</li>
-                                <li>Embedded Systems</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="project small">
-                        <div class="project-inner">
-                            <div class="project-top">
-                                <div class="folder">
-                                    <i class="fas fa-folder"></i>
-                                </div>
-                                <div class="project-links">
-                                    <a href="#" aria-label="GitHub Link">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="#" aria-label="External Link">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <h4 class="project-title">Formula One Electronics</h4>
-                            <p class="project-description">
-                                STM32-based control systems for high-performance electric racing vehicles.
-                            </p>
-                            <ul class="project-tech-list">
-                                <li>C++</li>
-                                <li>STM32</li>
-                                <li>Real-time Systems</li>
-                            </ul>
-                        </div>
+                    <!-- Scroll Navigation Dots -->
+                    <div class="scroll-navigation">
+                        <div class="scroll-dot active" onclick="scrollToProject(0)"></div>
+                        <div class="scroll-dot" onclick="scrollToProject(1)"></div>
+                        <div class="scroll-dot" onclick="scrollToProject(2)"></div>
                     </div>
                 </div>
             </div>
