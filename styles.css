@@ -910,6 +910,15 @@ code {
   mix-blend-mode: multiply;
   filter: grayscale(100%) contrast(1);
   transition: var(--transition);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.image-wrapper:hover img,
+.image-wrapper:focus img {
+  filter: none;
+  mix-blend-mode: normal;
 }
 
 /* Experience Section */
