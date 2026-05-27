@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Agent — Will Pelech</title>
+    <meta name="description" content="An AI agent that does your taxes using a ReAct loop — built without AI assistance.">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .post-date {
+            color: #9966cc;
+            font-family: Monaco, "Courier New", monospace;
+            font-size: 80%;
+            margin-bottom: 1.5em;
+            display: block;
+        }
+        .post h1:not(.nostyle):before {
+            content: none;
+        }
+        .post h1 {
+            font-size: 20pt;
+            margin-bottom: 0.25em;
+        }
+        .post p {
+            margin: 0.85em 0;
+        }
+        .post h2 {
+            margin-top: 1.75em;
+        }
+        .post img {
+            max-width: 100%;
+            display: block;
+            margin: 1.5em 0;
+            border: 1px solid #ede9fe;
+            border-radius: 4px;
+        }
+        .post ul li {
+            margin: 0.4em 0;
+        }
+        .back {
+            display: inline-block;
+            margin-bottom: 2em;
+            color: #a78bfa;
+            font-size: 90%;
+            text-decoration: none;
+        }
+        .back:hover {
+            color: #000;
+        }
+        .back:visited {
+            color: #a78bfa;
+        }
+        .back:before {
+            content: "← ";
+        }
+        .no-ai-badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #6d28d9;
+            border: 1px solid #c4b5fd;
+            border-radius: 4px;
+            font-size: 80%;
+            font-family: Monaco, "Courier New", monospace;
+            padding: 0.2em 0.6em;
+            margin-left: 0.75em;
+            vertical-align: middle;
+            font-weight: normal;
+        }
+        pre {
+            background: #f9f7ff;
+            border: 1px solid #ede9fe;
+            border-radius: 4px;
+            padding: 1em;
+            font-size: 85%;
+            overflow-x: auto;
+            margin: 1em 0;
+        }
+        code {
+            font-family: Monaco, "Courier New", monospace;
+            font-size: 88%;
+            background: #f9f7ff;
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        .images-placeholder {
+            border: 2px dashed #c4b5fd;
+            border-radius: 4px;
+            padding: 2em;
+            text-align: center;
+            color: #a78bfa;
+            font-size: 90%;
+            margin: 1.5em 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="site">
+        <header class="title">
+            <h1 class="nostyle"><a class="name" href="/">Will Pelech</a></h1>
+            <a class="extra" href="https://github.com/WillPelech">GitHub</a>
+            <a class="extra" href="https://www.linkedin.com/in/will-pelech"><svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0077b5"/><path fill="#fff" d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.28-7.14-6.05-8.68-2.96V8.48z"/></svg>LinkedIn</a>
+            <a class="extra" href="https://drive.google.com/file/d/1S7QYklixK0ZLSzbaSsgIko3-nGntS5m4/view?usp=sharing" target="_blank">Resume</a>
+            <a class="extra" href="mailto:wep9428@nyu.edu">Email</a>
+        </header>
+
+        <article class="post">
+            <a class="back" href="/">Back to home</a>
+
+            <h1>Tax Agent <span class="no-ai-badge">built without AI</span></h1>
+            <span class="post-date">2026 · Python · <a href="https://github.com/WillPelech/tax_agent">github.com/WillPelech/tax_agent</a></span>
+
+            <p>
+                An AI agent that does your taxes — built entirely by hand, no AI assistance in writing the code.
+                It uses a ReAct (Reason + Act) loop to reason through tax logic, call tools via MCP, and produce results
+                in an isolated sandbox environment.
+            </p>
+
+            <div class="images-placeholder">
+                [ screenshots / demo images coming soon ]
+            </div>
+
+            <h2>How it works</h2>
+            <p>
+                The agent follows the ReAct pattern: it alternates between reasoning about the current state
+                and taking actions by calling tools exposed through an MCP server. Each action's result is fed
+                back into the next reasoning step until the agent reaches a final answer.
+            </p>
+            <p>
+                Tool execution happens inside a sandboxed VM so nothing runs on your host machine directly.
+                The sandbox is bootstrapped via shell scripts and communicated with over a local URL.
+            </p>
+
+            <h2>Architecture</h2>
+            <pre><code>agent/
+  agent.py      # LLM client factory + ReAct loop
+  client.py     # LLMClient base class + provider implementations
+  prompt.py     # system and user prompts
+  registry.py   # MCP tool registry
+mcp_server/     # MCP server exposing tax tools to the agent
+scripts/        # VM / sandbox bootstrap
+main.py         # entrypoint</code></pre>
+
+            <h2>Provider-agnostic design</h2>
+            <p>
+                The client layer is fully swappable. Switch providers by editing <code>model-config.yaml</code>:
+            </p>
+            <pre><code>model: "qwen3:0.6b"
+provider: "Qwen"
+sandbox_url: "http://localhost:8080"</code></pre>
+            <p>
+                Adding a new provider means subclassing <code>LLMClient</code> in <code>agent/client.py</code>,
+                implementing <code>chat(self, message: str) -> str</code>, and adding a branch in <code>buildClient</code>.
+            </p>
+
+            <h2>Running locally — no API key needed</h2>
+            <p>
+                The whole thing runs on a small local model via Ollama, so you don't need an OpenAI key or any
+                external service.
+            </p>
+            <pre><code>ollama pull qwen3:0.6b
+git clone https://github.com/WillPelech/tax_agent
+cd tax_agent
+uv sync
+uv run main.py</code></pre>
+
+            <h2>Why no AI?</h2>
+            <p>
+                I wanted a clear understanding of every layer — the ReAct loop, the MCP tool protocol,
+                the sandbox boundary, and the provider abstraction. Writing it from scratch forced me to
+                actually understand each piece rather than accepting generated boilerplate. Coming off
+                my internship at Datadog where I worked on AI agent infrastructure at scale, it was
+                a good exercise to build the full stack myself.
+            </p>
+
+            <h2>Source</h2>
+            <p>
+                <a href="https://github.com/WillPelech/tax_agent">github.com/WillPelech/tax_agent</a>
+            </p>
+        </article>
+
+        <footer class="footer">
+            <p>Will Pelech · Computer Engineering @ NYU</p>
+        </footer>
+    </div>
+</body>
+</html>
