@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIY E-Reader — Will Pelech</title>
-    <meta name="description" content="How I built a custom e-reader from scratch.">
+    <meta name="description" content="Building a 7.5-inch e-ink display with the TRMNL DIY kit and XIAO ESP32-S3.">
     <link rel="stylesheet" href="./styles.css">
     <style>
         .post-date {
             color: #9966cc;
             font-family: Monaco, "Courier New", monospace;
             font-size: 80%;
-            margin-bottom: 1.5em;
+            margin-bottom: 2em;
             display: block;
         }
         .post h1:not(.nostyle):before {
@@ -20,18 +20,20 @@
         .post h1 {
             font-size: 20pt;
             margin-bottom: 0.25em;
+            line-height: 1.2;
         }
         .post p {
-            margin: 0.85em 0;
+            margin: 0.9em 0;
         }
         .post h2 {
-            margin-top: 1.75em;
+            margin-top: 2em;
         }
         .post img {
             max-width: 100%;
             display: block;
             margin: 1.5em 0;
-            border: 1px solid #eee;
+            border: 1px solid #ede9fe;
+            border-radius: 4px;
         }
         .post ul li {
             margin: 0.4em 0;
@@ -39,17 +41,62 @@
         .back {
             display: inline-block;
             margin-bottom: 2em;
-            color: #aaa;
+            color: #a78bfa;
             font-size: 90%;
+            text-decoration: none;
         }
-        .back:hover {
-            color: #000;
+        .back:hover { color: #000; }
+        .back:visited { color: #a78bfa; }
+        .back:before { content: "← "; }
+        pre {
+            background: #f9f7ff;
+            border: 1px solid #ede9fe;
+            border-radius: 4px;
+            padding: 1em;
+            font-size: 85%;
+            overflow-x: auto;
+            margin: 1em 0;
         }
-        .back:visited {
-            color: #aaa;
+        code {
+            font-family: Monaco, "Courier New", monospace;
+            font-size: 88%;
+            background: #f9f7ff;
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
         }
-        .back:before {
-            content: "← ";
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 90%;
+            margin: 1em 0;
+        }
+        td, th {
+            border: 1px solid #ede9fe;
+            padding: 0.4em 0.75em;
+            text-align: left;
+        }
+        th {
+            background: #f9f7ff;
+            color: #6d28d9;
+            font-weight: bold;
+        }
+        .images-placeholder {
+            border: 2px dashed #c4b5fd;
+            border-radius: 4px;
+            padding: 2em;
+            text-align: center;
+            color: #a78bfa;
+            font-size: 90%;
+            margin: 1.5em 0;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #ede9fe;
+            margin: 2.5em 0;
         }
     </style>
 </head>
@@ -58,63 +105,95 @@
         <header class="title">
             <h1 class="nostyle"><a class="name" href="/">Will Pelech</a></h1>
             <a class="extra" href="https://github.com/WillPelech">GitHub</a>
-            <a class="extra" href="https://www.linkedin.com/in/will-pelech">LinkedIn</a>
-            <a class="extra" href="https://drive.google.com/file/d/1S7QYklixK0ZLSzbaSsgIko3-nGntS5m4/view?usp=sharing">Resume</a>
+            <a class="extra" href="https://www.linkedin.com/in/will-pelech"><svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0077b5"/><path fill="#fff" d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.28-7.14-6.05-8.68-2.96V8.48z"/></svg>LinkedIn</a>
+            <a class="extra" href="https://drive.google.com/file/d/1S7QYklixK0ZLSzbaSsgIko3-nGntS5m4/view?usp=sharing" target="_blank">Resume</a>
             <a class="extra" href="mailto:wep9428@nyu.edu">Email</a>
         </header>
 
         <article class="post">
             <a class="back" href="/">Back to home</a>
 
-            <h1>Building a DIY E-Reader</h1>
-            <span class="post-date">May 2026</span>
+            <h1>DIY E-Ink Display</h1>
+            <span class="post-date">2026 · ESP32-S3 · E-Ink · TRMNL · ESPHome</span>
 
             <p>
-                I wanted an e-reader that fit exactly what I needed — so I built one. This is a writeup of
-                how it came together, from picking components to getting a working device in my hands.
+                I built a 7.5-inch e-ink dashboard using the
+                <a href="https://wiki.seeedstudio.com/trmnl_7inch5_diy_kit_main_page/">TRMNL 7.5" DIY Kit</a>
+                from Seeed Studio. The goal was a low-power, always-on display I could customize — something
+                a commercial e-reader wouldn't let me do.
             </p>
 
-            <h2>Motivation</h2>
+            <div class="images-placeholder">
+                [ photos coming soon ]
+            </div>
+
+            <h2>The kit</h2>
             <p>
-                Commercial e-readers are great, but they come with locked-down software, proprietary formats,
-                and hardware I can't modify. I wanted something open, hackable, and built to my specs.
-                [Add your motivation here.]
+                The TRMNL kit is co-developed by Seeed Studio and TRMNL. It ships as a handful of components
+                you assemble yourself — no soldering required, just careful FPC cable handling.
             </p>
 
-            <h2>Hardware</h2>
+            <table>
+                <tr><th>Component</th><th>Details</th></tr>
+                <tr><td>Display</td><td>7.5" monochrome e-ink, 800×480</td></tr>
+                <tr><td>Driver board</td><td>XIAO ESP32-S3 Plus (MCU + ePaper controller onboard)</td></tr>
+                <tr><td>Battery</td><td>2000mAh rechargeable Li-ion</td></tr>
+                <tr><td>Cable</td><td>10cm FPC extension + FPC connector</td></tr>
+                <tr><td>Enclosure</td><td>3D printed (open-source files on Printables / Thingiverse)</td></tr>
+            </table>
+
+            <h2>Assembly</h2>
             <p>
-                [Describe the e-ink display, microcontroller, battery, PCB, enclosure, etc.]
+                The trickiest part is the FPC cable. It's extremely fragile and the connector only works
+                one way — metal side facing up. Getting it wrong means no display output and potentially
+                a damaged cable. I got it wrong once. The Seeed wiki has a step-by-step installation guide
+                that's worth following exactly.
+            </p>
+            <p>
+                After the cable, it's straightforward: connect the battery JST connector (red to +, black to -),
+                print an enclosure, and assemble. The antenna can be routed outside the case if you're far
+                from your router.
+            </p>
+
+            <h2>Software</h2>
+            <p>
+                The ESP32-S3 supports three different software paths depending on what you want to do:
             </p>
             <ul>
-                <li>[Component 1]</li>
-                <li>[Component 2]</li>
-                <li>[Component 3]</li>
+                <li><strong>TRMNL BYOD</strong> — no-code dashboard platform with 375+ plugins (Calendar, GitHub, Shopify, weather, etc.) and 8 layouts. Easiest way to get something on the screen fast.</li>
+                <li><strong>ESPHome + Home Assistant</strong> — full integration into a home automation setup. Flash ESPHome firmware and control the display from Home Assistant automations.</li>
+                <li><strong>Arduino IDE</strong> — write your own firmware from scratch. Full control over refresh logic, graphics rendering, and power management.</li>
             </ul>
-
-            <h2>Firmware</h2>
             <p>
-                [Describe the firmware — language, rendering pipeline, file formats supported, input handling, etc.]
+                [Add what software path you used and what you built with it here.]
             </p>
 
-            <h2>Enclosure</h2>
+            <h2>Battery life</h2>
             <p>
-                [3D printed? Laser cut? Describe the physical build.]
+                E-ink is uniquely suited for low-power applications because it only draws power when
+                refreshing — the image persists with no power once set. With the ESP32-S3 in deep sleep
+                between updates, the 2000mAh battery lasts up to three months at a 6-hour refresh interval.
+                Even at a 1-hour refresh that's weeks of runtime on a single charge.
             </p>
 
-            <h2>Challenges</h2>
+            <h2>Display specs</h2>
             <p>
-                [What was hard? E-ink refresh rates, power management, font rendering?]
+                The panel does a partial refresh in 0.34 seconds and a full refresh in 3.5 seconds.
+                Monochrome only — no grayscale, no color. For a dashboard showing text and simple graphics
+                that's perfectly fine. The 800×480 resolution at 7.5 inches is sharp enough to read
+                comfortably from across a desk.
             </p>
 
-            <h2>Result</h2>
+            <h2>What I'd add</h2>
             <p>
-                [How did it turn out? What works well, what would you do differently?]
+                [Your thoughts on what you'd change, extend, or build next — add these yourself.]
             </p>
 
-            <h2>Source &amp; Files</h2>
+            <hr>
+
             <p>
-                Code and schematics on <a href="https://github.com/WillPelech">GitHub</a>.
-                [Link to specific repo when ready.]
+                Kit: <a href="https://wiki.seeedstudio.com/trmnl_7inch5_diy_kit_main_page/">TRMNL 7.5" DIY Kit — Seeed Studio</a><br>
+                Questions — <a href="mailto:wep9428@nyu.edu">wep9428@nyu.edu</a>
             </p>
         </article>
 
