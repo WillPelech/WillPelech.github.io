@@ -20,134 +20,33 @@
         <main>
             <blockquote>
                 I'm a Computer Engineering student at NYU with a minor in Quantum Technology.
-                I build scalable systems, work on distributed data pipelines, and explore AI agents
+                I build scalable systems, work on AI agent infrastructure, and explore distributed data
                 and the intersection of quantum and classical computing.
             </blockquote>
 
             <a class="resume-link" href="https://drive.google.com/file/d/1S7QYklixK0ZLSzbaSsgIko3-nGntS5m4/view?usp=sharing" target="_blank">↓ Download Resume (PDF)</a>
 
-            <h1>About Me</h1>
-            <p>
-                Hello! I'm Will, studying Computer Engineering at New York University. My work spans
-                software engineering internships, embedded systems, and teaching — from building AI agent
-                infrastructure at Datadog to optimizing Spark pipelines at LinkedIn to designing control
-                systems for NYU Formula One.
-            </p>
-            <p>Technologies I've been working with recently:</p>
-            <ul>
-                <li>Python, Golang, Java, Scala, C/C++, JavaScript, SQL</li>
-                <li>PyTorch, TensorFlow, Spark, AWS, React, Docker, Flask, WASM</li>
-                <li>MCP, LLM APIs, Agent Frameworks, RAG, Vector Databases, Multi-Model Architecture</li>
-                <li>Qiskit, STM32, KiCad, OpenHouse, Apache Airflow</li>
-            </ul>
-
-            <h1>Experience</h1>
-
-            <div class="home-section">
-                <h2>Industry</h2>
-
-                <div class="item">
-                    <div class="item-logo">
-                        <div class="logo-badge">
-                            <img src="datadog-logo.webp" alt="Datadog">
-                        </div>
-                    </div>
-                    <div class="item-desc">
-                        <h3 class="item-name">Software Engineer Intern – Bits AI SRE <span class="at">@ Datadog</span></h3>
-                        <p class="meta">Jan 2026 – Apr 2026 · New York, NY</p>
-                        <div class="item-body">
-                            <p>Led agent stress testing by simulating 1,300+ MCP tools; built a deferred tool-loading interface that reduced context usage, cut costs by 30%, improved evaluation scores by 6%, and enabled support for more tools.</p>
-                            <p>Engineered LLM provider fallback logic with OpenAI engineers, maintaining 99% agent uptime when the default provider goes down. Architected a Python-based WASM sandbox for isolated tool execution, cutting context usage by 70%. Designed a search tool that dynamically loads skills at runtime improving accuracy on specialized datasets by 35%.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-desc">
-                        <h3 class="item-name">Software Engineer Intern – Ads Identity <span class="at">@ LinkedIn</span></h3>
-                        <p class="meta">May 2025 – Aug 2025 · Sunnyvale, CA</p>
-                        <div class="item-body">
-                            <p>Implemented scalable Apache Airflow workflows to migrate and transform over 112 terabytes of identity data from HDFS to OpenHouse. Optimized Spark-based pipelines, cutting end-to-end latency by 7 hours and reducing data freshness lag by 6 hours. Reduced data overhead by 60% through schema optimization, boosting I/O query throughput by 22%.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-desc">
-                        <h3 class="item-name">Software Engineering &amp; Mechatronics Intern <span class="at">@ Physik Instrumente</span></h3>
-                        <p class="meta">May 2024 – Aug 2024 · New York, NY</p>
-                        <div class="item-body">
-                            <p>Streamlined position-correcting algorithms using Z-Transforms and FFTs for real-time mixed-signal analysis. Reduced positional errors by over 30% and achieved sub-40 nanometer precision with harmonic wave cancellation and ML-based noise reduction.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="home-section">
-                <h2>University</h2>
-
-                <div class="item">
-                    <div class="item-desc">
-                        <h3 class="item-name">Teaching Assistant <span class="at">@ NYU</span></h3>
-                        <p class="meta">February 2024 – August 2025</p>
-                        <div class="item-body">
-                            <p>Coordinated lectures across 5 departments for 100+ students in programming fundamentals, data structures, and algorithms. Developed assignments, held office hours, and mentored students one-on-one.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-desc">
-                        <h3 class="item-name">Senior Engineer <span class="at">@ NYU Formula One Team</span></h3>
-                        <p class="meta">Jun 2023 – Present · New York, NY</p>
-                        <div class="item-body">
-                            <p>Designed a modular STM32 template board integrated with 10 safety sensors, reducing fault detection time by 40%. Built an RPM sensing system with Hall effect sensors and a real-time monitoring dashboard, increasing drivetrain testing accuracy by 30%.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-desc">
-                        <h3 class="item-name">Embedded Systems Engineer <span class="at">@ Student Impact Innovation Lab</span></h3>
-                        <p class="meta">Jun 2023 – Jan 2024</p>
-                        <div class="item-body">
-                            <p>Prototyped a heart rate monitor with embedded C software and custom circuit boards. Designed a compact ECG system with 20+ discrete components in KiCad and built a Python UI with PlatformIO for signal visualization.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-desc">
-                        <h3 class="item-name">B.S. Computer Engineering <span class="at">@ NYU</span></h3>
-                        <p class="meta">May 2026</p>
-                        <div class="item-body">
-                            <p>Minor in Quantum Technology. GPA 3.93/4.0. Tandon Scholarship, Tau Beta Pi, Dean's List (2022–2025). Coursework includes quantum machine learning, computer architecture, data structures, digital logic, and linear algebra.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Projects first — the most interesting work -->
             <h1>Projects</h1>
 
             <div class="home-section">
-                <h2>Featured</h2>
-                <span class="section-subtitle">Things I've built recently.</span>
+                <h2>Recent</h2>
 
                 <div class="item">
                     <div class="item-desc">
-                        <h3 class="item-name"><a href="/tax-agent.html">Tax Agent</a> <span style="font-weight:normal;color:#a78bfa;font-size:85%;">— built without AI</span></h3>
+                        <h3 class="item-name"><a href="tax-agent.html">Tax Agent</a> <span style="font-weight:normal;color:#a78bfa;font-size:85%;">— built without AI</span></h3>
+                        <p class="meta">2026 · Python · MCP · ReAct · Ollama</p>
                         <div class="item-body">
-                            <p>An AI agent that does your taxes using a ReAct (Reason + Act) loop. Provider-agnostic, runs fully locally via Ollama with no API key needed. Built from scratch without AI assistance. <a href="/tax-agent.html">Read more →</a></p>
-                            <p class="tech">Python · MCP · ReAct · Ollama · WASM sandbox</p>
+                            <p>An AI agent that does your taxes using a ReAct (Reason + Act) loop. Provider-agnostic, runs fully locally via Ollama with no API key. Built from scratch without AI assistance — every design decision made by hand. <a href="tax-agent.html">Read more →</a></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="item">
                     <div class="item-desc">
-                        <h3 class="item-name"><a href="/ereader.html">DIY E-Reader</a></h3>
+                        <h3 class="item-name"><a href="ereader.html">DIY E-Reader</a></h3>
                         <div class="item-body">
-                            <p>A custom-built e-reader I designed and assembled from scratch — hardware, firmware, and all. <a href="/ereader.html">Read more →</a></p>
+                            <p>A custom-built e-reader designed and assembled from scratch — hardware, firmware, and enclosure. <a href="ereader.html">Read more →</a></p>
                         </div>
                     </div>
                 </div>
@@ -155,9 +54,9 @@
                 <div class="item">
                     <div class="item-desc">
                         <h3 class="item-name"><a href="https://github.com/WillPelech/AxolotlDatabaseProject">PlatePal</a></h3>
+                        <p class="meta">Flask · React · Python · MySQL · Google Maps API</p>
                         <div class="item-body">
-                            <p>Full-stack restaurant discovery and ordering platform. Users can discover, review, and order from local restaurants with real-time Google Maps location tracking.</p>
-                            <p class="tech">Flask · JavaScript · React · Python · MySQL · Google Maps API</p>
+                            <p>Full-stack restaurant discovery and ordering platform. Users discover, review, and order from local restaurants with real-time Google Maps location tracking.</p>
                         </div>
                     </div>
                 </div>
@@ -165,9 +64,9 @@
                 <div class="item">
                     <div class="item-desc">
                         <h3 class="item-name"><a href="https://github.com/cfgjc24/Team-5">Lodestar — JPMorgan Code for Good</a></h3>
+                        <p class="meta">React · TypeScript · Node.js · Cloud Firestore · Google Maps API</p>
                         <div class="item-body">
                             <p>Real-time supervisor dashboard for monitoring employee safety during client visits — live location tracking, emergency notifications, and check-ins, built in 24 hours.</p>
-                            <p class="tech">React · TypeScript · Node.js · Express · Tailwind · Google Maps API · Cloud Firestore</p>
                         </div>
                     </div>
                 </div>
@@ -193,30 +92,117 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Experience next -->
+            <h1>Experience</h1>
+
+            <div class="home-section">
+                <h2>Industry</h2>
+
+                <div class="item">
+                    <div class="item-logo">
+                        <div class="logo-badge">
+                            <img src="datadog-logo.webp" alt="Datadog">
+                        </div>
+                    </div>
+                    <div class="item-desc">
+                        <h3 class="item-name">Software Engineer Intern – Bits AI SRE <span class="at">@ Datadog</span></h3>
+                        <p class="meta">Jan 2026 – Apr 2026 · New York, NY</p>
+                        <div class="item-body">
+                            <p>Led agent stress testing by simulating 1,300+ MCP tools; built a deferred tool-loading interface that cut costs by 30% and improved evaluation scores by 6%. Engineered LLM provider fallback logic with OpenAI engineers maintaining 99% agent uptime. Architected a Python-based WASM sandbox for isolated tool execution, cutting context usage by 70%.</p>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="item">
                     <div class="item-desc">
-                        <h3 class="item-name">Formula One Electronics</h3>
+                        <h3 class="item-name">Software Engineer Intern – Ads Identity <span class="at">@ LinkedIn</span></h3>
+                        <p class="meta">May 2025 – Aug 2025 · Sunnyvale, CA</p>
                         <div class="item-body">
-                            <p>STM32-based control systems for high-performance electric racing vehicles.</p>
+                            <p>Implemented scalable Apache Airflow workflows to migrate 112TB of identity data from HDFS to OpenHouse. Optimized Spark pipelines cutting end-to-end latency by 7 hours. Reduced data overhead 60% through schema optimization, boosting I/O query throughput by 22%.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-desc">
+                        <h3 class="item-name">Software Engineering &amp; Mechatronics Intern <span class="at">@ Physik Instrumente</span></h3>
+                        <p class="meta">May 2024 – Aug 2024 · New York, NY</p>
+                        <div class="item-body">
+                            <p>Streamlined position-correcting algorithms using Z-Transforms and FFTs for real-time mixed-signal analysis. Achieved sub-40 nanometer precision with harmonic wave cancellation and ML-based noise reduction.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="home-section">
+                <h2>University</h2>
+
+                <div class="item">
+                    <div class="item-desc">
+                        <h3 class="item-name">Senior Engineer <span class="at">@ NYU Formula One Team</span></h3>
+                        <p class="meta">Jun 2023 – Present · New York, NY</p>
+                        <div class="item-body">
+                            <p>Designed a modular STM32 board with 10 safety sensors, reducing fault detection time by 40%. Built an RPM sensing system with Hall effect sensors and a real-time monitoring dashboard.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-desc">
+                        <h3 class="item-name">Teaching Assistant <span class="at">@ NYU</span></h3>
+                        <p class="meta">Feb 2024 – Aug 2025</p>
+                        <div class="item-body">
+                            <p>100+ students across 5 departments in programming fundamentals, data structures, and algorithms.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-desc">
+                        <h3 class="item-name">Embedded Systems Engineer <span class="at">@ Student Impact Innovation Lab</span></h3>
+                        <p class="meta">Jun 2023 – Jan 2024</p>
+                        <div class="item-body">
+                            <p>Prototyped a heart rate monitor and ECG system with 20+ discrete components in KiCad. Built a Python UI with PlatformIO for signal visualization.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education and skills -->
+            <h1>Education &amp; Skills</h1>
+
+            <div class="home-section">
+                <div class="item">
+                    <div class="item-desc">
+                        <h3 class="item-name">B.S. Computer Engineering <span class="at">@ NYU</span></h3>
+                        <p class="meta">May 2026</p>
+                        <div class="item-body">
+                            <p>Minor in Quantum Technology. GPA 3.93/4.0. Tandon Scholarship, Tau Beta Pi, Dean's List (2022–2025). Coursework: quantum machine learning, computer architecture, data structures, digital logic, linear algebra.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p>Languages: Python, Golang, Java, Scala, C/C++, JavaScript, SQL</p>
+            <p>AI &amp; Agents: MCP, LLM APIs, Agent Frameworks, RAG, Vector Databases, Multi-Model Architecture</p>
+            <p>Technologies: PyTorch, TensorFlow, Spark, AWS, React, Docker, Flask, WASM, Apache Airflow, Qiskit, STM32, KiCad</p>
+
+            <!-- Chronological log -->
             <h1>Stuff I've Done</h1>
-            <p class="section-subtitle">A rough chronological list of work and projects.</p>
+            <p class="section-subtitle">A rough chronological log.</p>
 
             <h2>2026</h2>
             <ul class="timeline">
-                <li>Software Engineer Intern at Datadog (Bits AI SRE) — MCP tools, WASM sandbox, LLM provider fallback, agent stress testing</li>
+                <li>Software Engineer Intern at Datadog (Bits AI SRE) — MCP, WASM sandbox, LLM fallback, agent stress testing</li>
                 <li>Built Tax Agent — ReAct loop tax agent in Python, written without AI assistance</li>
             </ul>
 
             <h2>2025</h2>
             <ul class="timeline">
-                <li>Software Engineer Intern at LinkedIn (Ads Identity) — Airflow workflows, Spark optimization, 112TB data migration</li>
-                <li>Teaching Assistant at NYU — 100+ students across programming and algorithms courses</li>
+                <li>Software Engineer Intern at LinkedIn (Ads Identity) — Airflow workflows, Spark optimization, 112TB migration</li>
+                <li>Teaching Assistant at NYU — 100+ students</li>
             </ul>
 
             <h2>2024</h2>
@@ -230,7 +216,7 @@
                 <li>Joined NYU Formula One Team as Senior Engineer — STM32 safety systems, RPM sensing</li>
                 <li>Embedded Systems Engineer at Student Impact Innovation Lab — ECG prototype, KiCad boards</li>
                 <li>Built PlatePal — full-stack restaurant platform</li>
-                <li>Lodestar — JPMorgan Code for Good hackathon project</li>
+                <li>Lodestar — JPMorgan Code for Good hackathon</li>
             </ul>
 
             <h1>Get In Touch</h1>

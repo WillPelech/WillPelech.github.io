@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Agent — Will Pelech</title>
-    <meta name="description" content="An AI agent that does your taxes using a ReAct loop — built without AI assistance.">
+    <title>I Built a Tax Agent Without AI — Will Pelech</title>
+    <meta name="description" content="How and why I built an AI tax agent entirely by hand, no AI assistance.">
     <link rel="stylesheet" href="./styles.css">
     <style>
         .post-date {
             color: #9966cc;
             font-family: Monaco, "Courier New", monospace;
             font-size: 80%;
-            margin-bottom: 1.5em;
+            margin-bottom: 2em;
             display: block;
         }
         .post h1:not(.nostyle):before {
@@ -20,12 +20,13 @@
         .post h1 {
             font-size: 20pt;
             margin-bottom: 0.25em;
+            line-height: 1.2;
         }
         .post p {
-            margin: 0.85em 0;
+            margin: 0.9em 0;
         }
         .post h2 {
-            margin-top: 1.75em;
+            margin-top: 2em;
         }
         .post img {
             max-width: 100%;
@@ -44,27 +45,23 @@
             font-size: 90%;
             text-decoration: none;
         }
-        .back:hover {
-            color: #000;
-        }
-        .back:visited {
-            color: #a78bfa;
-        }
-        .back:before {
-            content: "← ";
-        }
+        .back:hover { color: #000; }
+        .back:visited { color: #a78bfa; }
+        .back:before { content: "← "; }
         .no-ai-badge {
             display: inline-block;
             background: #ede9fe;
             color: #6d28d9;
             border: 1px solid #c4b5fd;
             border-radius: 4px;
-            font-size: 80%;
+            font-size: 60%;
             font-family: Monaco, "Courier New", monospace;
             padding: 0.2em 0.6em;
             margin-left: 0.75em;
             vertical-align: middle;
             font-weight: normal;
+            position: relative;
+            top: -3px;
         }
         pre {
             background: #f9f7ff;
@@ -95,6 +92,11 @@
             font-size: 90%;
             margin: 1.5em 0;
         }
+        hr {
+            border: none;
+            border-top: 2px solid #ede9fe;
+            margin: 2.5em 0;
+        }
     </style>
 </head>
 <body>
@@ -110,75 +112,111 @@
         <article class="post">
             <a class="back" href="/">Back to home</a>
 
-            <h1>Tax Agent <span class="no-ai-badge">built without AI</span></h1>
-            <span class="post-date">2026 · Python · <a href="https://github.com/WillPelech/tax_agent">github.com/WillPelech/tax_agent</a></span>
+            <h1>I Built a Tax Agent Without AI <span class="no-ai-badge">built without AI</span></h1>
+            <span class="post-date">May 2026 · Python · <a href="https://github.com/WillPelech/tax_agent">github.com/WillPelech/tax_agent</a></span>
 
             <p>
-                An AI agent that does your taxes — built entirely by hand, no AI assistance in writing the code.
-                It uses a ReAct (Reason + Act) loop to reason through tax logic, call tools via MCP, and produce results
-                in an isolated sandbox environment.
+                I just finished a four-month internship at Datadog working on AI agent infrastructure — stress testing
+                agents, building WASM sandboxes, engineering fallback logic between LLM providers. I spent the whole time
+                thinking about agents at scale. So when I got home, I wanted to build one myself, the whole thing, by hand,
+                with no AI helping me write the code.
+            </p>
+
+            <p>
+                The project: an agent that does your taxes. Not a chatbot wrapper. An actual agent with a ReAct loop,
+                MCP tooling, a sandboxed execution environment, and a swappable provider layer — everything I'd been
+                working on professionally, built from scratch on my own terms.
             </p>
 
             <div class="images-placeholder">
-                [ screenshots / demo images coming soon ]
+                [ screenshots / demo coming soon ]
             </div>
 
-            <h2>How it works</h2>
+            <h2>Why taxes?</h2>
             <p>
-                The agent follows the ReAct pattern: it alternates between reasoning about the current state
-                and taking actions by calling tools exposed through an MCP server. Each action's result is fed
-                back into the next reasoning step until the agent reaches a final answer.
+                Taxes are a good benchmark problem for an agent. They require multi-step reasoning — you can't just
+                answer in one shot. There are rules that depend on other rules. You need to look things up, do arithmetic,
+                and handle edge cases that don't fit a simple template. If your ReAct loop is broken, the agent will
+                confidently produce garbage. It's a good stress test.
             </p>
             <p>
-                Tool execution happens inside a sandboxed VM so nothing runs on your host machine directly.
-                The sandbox is bootstrapped via shell scripts and communicated with over a local URL.
+                It's also just a useful thing to have. Tax software is notoriously bad. I figured an agent that could
+                reason through the actual logic would be more interesting than another form-filler.
             </p>
 
-            <h2>Architecture</h2>
-            <pre><code>agent/
-  agent.py      # LLM client factory + ReAct loop
-  client.py     # LLMClient base class + provider implementations
-  prompt.py     # system and user prompts
-  registry.py   # MCP tool registry
-mcp_server/     # MCP server exposing tax tools to the agent
-scripts/        # VM / sandbox bootstrap
-main.py         # entrypoint</code></pre>
-
-            <h2>Provider-agnostic design</h2>
+            <h2>The ReAct loop</h2>
             <p>
-                The client layer is fully swappable. Switch providers by editing <code>model-config.yaml</code>:
+                ReAct stands for Reason + Act. The agent alternates between two phases: it thinks out loud about
+                what it knows and what it needs to figure out, then it calls a tool to get more information or take
+                an action. The result comes back, gets appended to the context, and the loop runs again.
+            </p>
+            <p>
+                This sounds simple but there's a lot of implementation detail in getting it right. How do you
+                structure the prompt so the model actually alternates between reasoning and acting instead of
+                just reasoning forever? How do you parse the tool call out of the model's output reliably?
+                How do you know when the agent is done? Writing it by hand meant I had to make every one of
+                those decisions myself.
+            </p>
+
+            <h2>MCP tooling</h2>
+            <p>
+                The tools the agent can call are exposed through an MCP server. MCP (Model Context Protocol)
+                is the standard Anthropic open-sourced for connecting models to tools — I'd worked with it
+                extensively at Datadog, including simulating 1,300+ MCP tools in a stress test. Here I kept it
+                simple: a handful of tax-relevant tools served locally.
+            </p>
+            <p>
+                The registry in <code>agent/registry.py</code> maps tool names to their implementations. The
+                agent doesn't know anything about the tools ahead of time — it discovers them at runtime from
+                the MCP server, which is how the protocol is supposed to work.
+            </p>
+
+            <h2>Sandboxed execution</h2>
+            <p>
+                Tool execution runs inside a sandboxed VM. Nothing the agent calls touches your host machine directly.
+                This was something I spent a lot of time thinking about at Datadog — the security model for
+                sandboxed agent interactions is genuinely hard. For this project the sandbox is simpler, but
+                the principle is the same: you don't let an LLM run arbitrary code on your machine without a boundary.
+            </p>
+
+            <h2>Provider-agnostic from day one</h2>
+            <p>
+                One thing I got right early was making the LLM client layer fully swappable. Every provider
+                goes through the same interface:
+            </p>
+            <pre><code>class LLMClient:
+    def chat(self, message: str) -> str:
+        raise NotImplementedError</code></pre>
+            <p>
+                Swap providers by editing <code>model-config.yaml</code> — no code changes needed:
             </p>
             <pre><code>model: "qwen3:0.6b"
 provider: "Qwen"
 sandbox_url: "http://localhost:8080"</code></pre>
             <p>
-                Adding a new provider means subclassing <code>LLMClient</code> in <code>agent/client.py</code>,
-                implementing <code>chat(self, message: str) -> str</code>, and adding a branch in <code>buildClient</code>.
+                The default runs on a tiny local model via Ollama. No API key, no account, no cost.
+                I've been burned too many times by projects that only work if you have a specific
+                provider set up. Everything here runs on your laptop.
             </p>
 
-            <h2>Running locally — no API key needed</h2>
+            <h2>Why write it without AI?</h2>
             <p>
-                The whole thing runs on a small local model via Ollama, so you don't need an OpenAI key or any
-                external service.
+                At Datadog I was deep in generated code all day. It's fast, and a lot of it is good,
+                but I noticed I was losing the habit of actually thinking through design decisions.
+                When something breaks and the code wasn't yours to begin with, debugging is slower
+                because you're reading it for the first time at the worst possible moment.
             </p>
-            <pre><code>ollama pull qwen3:0.6b
-git clone https://github.com/WillPelech/tax_agent
-cd tax_agent
-uv sync
-uv run main.py</code></pre>
-
-            <h2>Why no AI?</h2>
             <p>
-                I wanted a clear understanding of every layer — the ReAct loop, the MCP tool protocol,
-                the sandbox boundary, and the provider abstraction. Writing it from scratch forced me to
-                actually understand each piece rather than accepting generated boilerplate. Coming off
-                my internship at Datadog where I worked on AI agent infrastructure at scale, it was
-                a good exercise to build the full stack myself.
+                Writing this by hand meant I had to understand every piece — the prompt structure,
+                the parsing logic, the tool dispatch, the sandbox boundary. There's no boilerplate here
+                I can't explain. That felt worth doing.
             </p>
 
-            <h2>Source</h2>
+            <hr>
+
             <p>
-                <a href="https://github.com/WillPelech/tax_agent">github.com/WillPelech/tax_agent</a>
+                Code is on <a href="https://github.com/WillPelech/tax_agent">GitHub</a>.
+                Questions or thoughts — <a href="mailto:wep9428@nyu.edu">email me</a>.
             </p>
         </article>
 
