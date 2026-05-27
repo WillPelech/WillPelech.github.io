@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Valet Robot — Will Pelech</title>
+    <meta name="description" content="Autonomous Raspberry Pi robot that retrieves toy cars from parking spots using computer vision and servo lifts.">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .post-date {
+            color: #9966cc;
+            font-family: Monaco, "Courier New", monospace;
+            font-size: 80%;
+            margin-bottom: 2em;
+            display: block;
+        }
+        .post h1:not(.nostyle):before { content: none; }
+        .post h1 {
+            font-size: 20pt;
+            margin-bottom: 0.25em;
+            line-height: 1.2;
+        }
+        .post p { margin: 0.9em 0; }
+        .post h2 { margin-top: 2em; }
+        .post img {
+            max-width: 100%;
+            display: block;
+            margin: 1.5em 0;
+            border: 1px solid #ede9fe;
+            border-radius: 4px;
+        }
+        .post ul li { margin: 0.4em 0; }
+        .back {
+            display: inline-block;
+            margin-bottom: 2em;
+            color: #a78bfa;
+            font-size: 90%;
+            text-decoration: none;
+        }
+        .back:hover { color: #000; }
+        .back:visited { color: #a78bfa; }
+        .back:before { content: "← "; }
+        pre {
+            background: #f9f7ff;
+            border: 1px solid #ede9fe;
+            border-radius: 4px;
+            padding: 1em;
+            font-size: 85%;
+            overflow-x: auto;
+            margin: 1em 0;
+        }
+        code {
+            font-family: Monaco, "Courier New", monospace;
+            font-size: 88%;
+            background: #f9f7ff;
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+        }
+        pre code { background: none; padding: 0; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 90%;
+            margin: 1em 0;
+        }
+        td, th {
+            border: 1px solid #ede9fe;
+            padding: 0.4em 0.75em;
+            text-align: left;
+        }
+        th {
+            background: #f9f7ff;
+            color: #6d28d9;
+            font-weight: bold;
+        }
+        .video-placeholder {
+            border: 2px dashed #c4b5fd;
+            border-radius: 4px;
+            padding: 2em;
+            text-align: center;
+            color: #a78bfa;
+            font-size: 90%;
+            margin: 1.5em 0;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #ede9fe;
+            margin: 2.5em 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="site">
+        <header class="title">
+            <h1 class="nostyle"><a class="name" href="/">Will Pelech</a></h1>
+            <a class="extra" href="blog.html">Blog</a>
+            <a class="extra" href="https://github.com/WillPelech">GitHub</a>
+            <a class="extra" href="https://www.linkedin.com/in/will-pelech"><svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0077b5"/><path fill="#fff" d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.28-7.14-6.05-8.68-2.96V8.48z"/></svg>LinkedIn</a>
+            <a class="extra" href="https://drive.google.com/file/d/1S7QYklixK0ZLSzbaSsgIko3-nGntS5m4/view?usp=sharing" target="_blank">Resume</a>
+            <a class="extra" href="mailto:wep9428@nyu.edu">Email</a>
+        </header>
+
+        <article class="post">
+            <a class="back" href="/">Back to home</a>
+
+            <h1>AI Valet Robot</h1>
+            <span class="post-date">2026 · Python · Raspberry Pi · Computer Vision · <a href="https://github.com/WillPelech/senior_design_final">github.com/WillPelech/senior_design_final</a></span>
+
+            <p>
+                For my senior design project I built an autonomous valet robot — a Raspberry Pi-powered rover
+                that navigates a track using color detection, picks up toy cars from designated parking spots
+                with a servo lift, and delivers them to an exit point. The whole thing is controllable from
+                a web UI over your local network.
+            </p>
+
+            <div class="video-placeholder">
+                [ demo video coming soon ]
+            </div>
+
+            <h2>What it does</h2>
+            <p>
+                The robot sits at HOME until you trigger a mission. You press 1 or 2 (or click the web UI)
+                and it navigates to the corresponding parking spot, lifts the car onto a platform using
+                two FS90 micro servos, drives to the EXIT, lowers the car, then returns home. All autonomously.
+            </p>
+            <p>
+                Navigation is purely vision-based. There are no encoders, no GPS, no IMU. A forward-facing
+                USB webcam detects colored squares on the walls — green for HOME, purple for EXIT, blue for
+                Parking Spot 1, red for Parking Spot 2. The robot spins in place until it sees the target
+                color, then uses PID steering on the horizontal offset from frame center to drive toward it.
+            </p>
+
+            <h2>State machine</h2>
+            <pre><code>IDLE → NAVIGATE → LIFTING → DELIVER → LOWER → RETURN → IDLE</code></pre>
+            <p>
+                Each state has one job. NAVIGATE line-follows to the target spot. LIFTING raises the servo
+                platform under the car. DELIVER drives to EXIT. LOWER drops the car. RETURN goes home.
+                If you hit SPACE at any point it hard-stops. The state machine made the logic easy to reason
+                about and easy to debug — when something went wrong I knew exactly which state to look at.
+            </p>
+
+            <h2>Hardware</h2>
+            <table>
+                <tr><th>Component</th><th>Details</th></tr>
+                <tr><td>Brain</td><td>Raspberry Pi 4B</td></tr>
+                <tr><td>Camera</td><td>Logitech C920 USB webcam (forward-facing, color detection)</td></tr>
+                <tr><td>Chassis</td><td>Adafruit Mini Robot Rover 2WD</td></tr>
+                <tr><td>Motor driver</td><td>Adafruit Motor HAT (I2C)</td></tr>
+                <tr><td>Lift</td><td>2× FS90 micro servos, synchronized</td></tr>
+                <tr><td>Power</td><td>USB-C power bank (Pi) + 6× AA batteries (motors)</td></tr>
+            </table>
+
+            <h2>PID steering</h2>
+            <p>
+                The steering controller runs on the x-error — the horizontal pixel offset of the detected
+                target from the center of the frame. Proportional term corrects the heading, derivative
+                term damps oscillation when the robot overshoots. All tunable constants live in
+                <code>config.py</code> so I could adjust them without touching the control logic.
+            </p>
+
+            <h2>Web UI</h2>
+            <p>
+                The web UI runs a Flask server on your laptop. It SSH-es into the Pi and uses
+                <code>tmux send-keys</code> to inject keypresses into the robot session running in a
+                detached tmux session. Clunky but effective — you just open <code>localhost:5000</code>
+                and click buttons to send missions from any device on the network.
+            </p>
+
+            <h2>What was hard</h2>
+            <p>
+                Color detection under variable lighting was the main challenge. The colored squares needed
+                to be distinct enough that the HSV thresholds didn't accidentally trigger on each other,
+                but robust enough to work under different room lighting. I ended up tuning the thresholds
+                empirically and adding a minimum area filter so small color noise didn't count as a detection.
+            </p>
+            <p>
+                The servo lift timing also took iteration. The platform needed to raise slowly enough not to
+                knock the car off, but fast enough that the robot didn't sit still long enough to drift off
+                the line. The final pulse widths are in <code>config.py</code>:
+                <code>SERVO_PULSE_DOWN_US = 1000</code>, <code>SERVO_PULSE_UP_US = 1800</code>.
+            </p>
+
+            <hr>
+
+            <p>
+                Code on <a href="https://github.com/WillPelech/senior_design_final">GitHub</a>.
+                Questions — <a href="mailto:wep9428@nyu.edu">wep9428@nyu.edu</a>
+            </p>
+        </article>
+
+        <footer class="footer">
+            <p>Will Pelech · Computer Engineering @ NYU</p>
+        </footer>
+    </div>
+</body>
+</html>
